@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.unicorn.tickets.ui.other.TitleBar
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivSuccess"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="96dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleBar"
+        app:srcCompat="@mipmap/icon_success" />
+
+    <TextView
+        android:id="@+id/tvPaySuccess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="您所提交的订单已收款"
+        android:textColor="@color/md_grey_800"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivSuccess" />
+
+    <TextView
+        android:id="@+id/labelTotalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="收款合计："
+        android:textColor="@color/md_grey_800"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/tvTotalPrice"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPaySuccess" />
+
+    <TextView
+        android:id="@+id/tvTotalPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="120元"
+        android:textColor="@color/md_red_400"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/labelTotalPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/labelTotalPrice"
+        app:layout_constraintTop_toTopOf="@+id/labelTotalPrice" />
+
+    <TextView
+        android:id="@+id/labelPayMethod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="收款方式："
+        android:textColor="@color/md_grey_800"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/labelTotalPrice"
+        app:layout_constraintTop_toBottomOf="@+id/labelTotalPrice" />
+
+    <TextView
+        android:id="@+id/tvPayType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="支付宝"
+        android:textColor="@color/md_blue_600"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/labelPayMethod"
+        app:layout_constraintStart_toEndOf="@+id/labelPayMethod"
+        app:layout_constraintTop_toTopOf="@+id/labelPayMethod" />
+
+    <TextView
+        android:id="@+id/tvPrompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:padding="18dp"
+        android:text="纸质信息票将会自动打印，如因纸张原因\n未能打印，可至查询界面重新打印。"
+        android:textColor="@color/md_grey_800"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelPayMethod" />
+
+    <com.flyco.roundview.RoundTextView
+        android:id="@+id/rtvBack"
+        android:layout_width="200dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="返回"
+        android:textColor="@color/md_white"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPrompt"
+        app:rv_backgroundColor="@color/md_blue_600"
+        app:rv_cornerRadius="4dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

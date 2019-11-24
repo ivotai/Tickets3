@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.unicorn.tickets">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".app.App"
+        android:allowBackup="false"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/logo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:allowBackup">
+        <activity android:name=".ui.act.main.LoginAct">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.act.main.MenuAct" />
+        <activity android:name=".ui.act.buyTicket.BuyTicketAct" />
+        <activity android:name=".ui.act.buyTicket.PaySuccessAct" />
+        <activity android:name=".ui.act.buyTicket.PayFailedAct" />
+        <activity android:name=".ui.act.orderSearch.OrderSearchAct" />
+        <activity android:name=".ui.act.checkTicket.CheckinTicketSuccessAct" />
+        <activity android:name=".ui.act.checkTicket.ValidateTicketSuccessAct" />
+        <activity android:name=".ui.act.checkTicket.CvTicketFailedAct" />
+        <activity android:name=".ui.act.OrderDetailAct" />
+        <activity android:name=".ui.act.team.TeamAct" />
+        <activity android:name=".ui.act.team.TeamDetailAct" />
+        <activity android:name=".ui.act.stateStatistic.StateStatisticAct" />
+        <activity android:name=".ui.act.main.CvMenuAct" />
+        <activity android:name=".ui.act.car.BatteryCarAct"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.act.car.CarTicketScanAct"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.act.car.CarOrderAct"/>
+
+    </application>
+
+</manifest>

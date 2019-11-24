@@ -1,0 +1,572 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.unicorn.tickets.ui.other.TitleBar
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvGroupName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:text="团队名称：公司旅游团队10人"
+                android:textColor="@color/md_black"
+                android:textSize="20dp"
+                app:layout_constraintStart_toStartOf="@+id/materialCardView1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvGroupName">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/labelDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:text="入园日期"
+                        android:textColor="@color/md_grey_400"
+                        android:textSize="18dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvTravelDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="32dp"
+                        android:text="2019-08-15"
+                        android:textColor="@color/md_black"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/labelDate"
+                        app:layout_constraintStart_toEndOf="@+id/labelDate"
+                        app:layout_constraintTop_toTopOf="@+id/labelDate"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <View
+                        android:id="@+id/divider1"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/md_grey_200"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/labelDate" />
+
+                    <TextView
+                        android:id="@+id/labelProperty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="团队性质"
+                        android:textColor="@color/md_grey_400"
+                        android:textSize="18dp"
+                        app:layout_constraintStart_toStartOf="@+id/labelDate"
+                        app:layout_constraintTop_toBottomOf="@+id/divider1" />
+
+                    <TextView
+                        android:id="@+id/tvGroupProperty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="企事业单位"
+                        android:textColor="@color/md_black"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/labelProperty"
+                        app:layout_constraintStart_toStartOf="@+id/tvTravelDate"
+                        app:layout_constraintTop_toTopOf="@+id/labelProperty"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <View
+                        android:id="@+id/divider2"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/md_grey_200"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/labelProperty" />
+
+                    <TextView
+                        android:id="@+id/labelNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="预计人数"
+                        android:textColor="@color/md_grey_400"
+                        android:textSize="18dp"
+                        app:layout_constraintStart_toStartOf="@+id/labelProperty"
+                        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+                    <TextView
+                        android:id="@+id/tvPeopleCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="总数10人，其中学生8名"
+                        android:textColor="@color/md_black"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/labelNum"
+                        app:layout_constraintStart_toStartOf="@+id/tvGroupProperty"
+                        app:layout_constraintTop_toTopOf="@+id/labelNum"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <View
+                        android:id="@+id/divider3"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/md_grey_200"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/labelNum" />
+
+                    <TextView
+                        android:id="@+id/labelRemark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="备注"
+                        android:textColor="@color/md_grey_400"
+                        android:textSize="18dp"
+                        app:layout_constraintStart_toStartOf="@+id/labelNum"
+                        app:layout_constraintTop_toBottomOf="@+id/divider3" />
+
+                    <TextView
+                        android:id="@+id/tvNotes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/md_black"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/labelRemark"
+                        app:layout_constraintStart_toStartOf="@+id/tvPeopleCount"
+                        app:layout_constraintTop_toTopOf="@+id/labelRemark"
+                        app:layout_constraintVertical_bias="1.0" />
+
+                    <View
+                        android:id="@+id/divider4"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/md_grey_200"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/labelRemark" />
+
+                    <TextView
+                        android:id="@+id/labelAttach"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:text="附件"
+                        android:textColor="@color/md_grey_400"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/labelRemark"
+                        app:layout_constraintTop_toBottomOf="@+id/divider4" />
+
+                    <TextView
+                        android:id="@+id/tvAttach"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="申请团队公章文件.pdf"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/labelAttach"
+                        app:layout_constraintStart_toStartOf="@+id/tvNotes"
+                        app:layout_constraintTop_toTopOf="@+id/labelAttach" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <View
+                        android:id="@+id/divider5"
+                        android:layout_width="6dp"
+                        android:layout_height="22dp"
+                        android:layout_marginStart="16dp"
+                        android:background="@color/colorPrimary"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvAudit"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tvAudit" />
+
+                    <TextView
+                        android:id="@+id/tvAudit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        android:text="审核情况"
+                        android:textColor="@color/md_black"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/divider5"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/divider6"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/md_grey_200"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvAudit" />
+
+                    <TextView
+                        android:id="@+id/labelName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:text="联系人姓名"
+                        android:textColor="@color/md_grey_400"
+                        android:textSize="18dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/divider6" />
+
+                    <TextView
+                        android:id="@+id/tvContact"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="36dp"
+                        android:text="吴广义"
+                        android:textColor="@color/md_black"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/labelName"
+                        app:layout_constraintStart_toEndOf="@+id/labelName"
+                        app:layout_constraintTop_toTopOf="@+id/labelName"
+                        app:layout_constraintVertical_bias="1.0" />
+
+                    <View
+                        android:id="@+id/divider7"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/md_grey_200"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/labelName" />
+
+                    <TextView
+                        android:id="@+id/labelMobile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="联系人电话"
+                        android:textColor="@color/md_grey_400"
+                        android:textSize="18dp"
+                        app:layout_constraintStart_toStartOf="@+id/labelName"
+                        app:layout_constraintTop_toBottomOf="@+id/divider7" />
+
+                    <TextView
+                        android:id="@+id/tvMobile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="13502145845"
+                        android:textColor="@color/md_black"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/labelMobile"
+                        app:layout_constraintStart_toStartOf="@+id/tvContact"
+                        app:layout_constraintTop_toTopOf="@+id/labelMobile"
+                        app:layout_constraintVertical_bias="1.0" />
+
+                    <View
+                        android:id="@+id/divider8"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/md_grey_200"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/labelMobile" />
+
+                    <TextView
+                        android:id="@+id/labelRate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="折扣率"
+                        android:textColor="@color/md_grey_400"
+                        android:textSize="18dp"
+                        app:layout_constraintStart_toStartOf="@+id/labelMobile"
+                        app:layout_constraintTop_toTopOf="@+id/divider8" />
+
+                    <TextView
+                        android:id="@+id/tvRate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="9折"
+                        android:textColor="@color/md_black"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/labelRate"
+                        app:layout_constraintStart_toStartOf="@+id/tvMobile"
+                        app:layout_constraintTop_toTopOf="@+id/labelRate"
+                        app:layout_constraintVertical_bias="1.0" />
+
+                    <View
+                        android:id="@+id/divider9"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="12dp"
+                        android:background="@color/md_grey_200"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/labelRate" />
+
+                    <TextView
+                        android:id="@+id/labelPopulation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="折扣人数"
+                        android:textColor="@color/md_grey_400"
+                        android:textSize="18dp"
+                        app:layout_constraintStart_toStartOf="@+id/labelRate"
+                        app:layout_constraintTop_toTopOf="@+id/divider9" />
+
+                    <TextView
+                        android:id="@+id/tvPopulation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="10人"
+                        android:textColor="@color/md_black"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/labelPopulation"
+                        app:layout_constraintStart_toStartOf="@+id/tvMobile"
+                        app:layout_constraintTop_toTopOf="@+id/labelPopulation"
+                        app:layout_constraintVertical_bias="1.0" />
+
+                    <View
+                        android:id="@+id/divider10"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/md_grey_200"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/labelPopulation" />
+
+                    <TextView
+                        android:id="@+id/labelMoney"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="折后金额"
+                        android:textColor="@color/md_grey_400"
+                        android:textSize="18dp"
+                        app:layout_constraintStart_toStartOf="@+id/labelPopulation"
+                        app:layout_constraintTop_toBottomOf="@+id/divider10" />
+
+                    <TextView
+                        android:id="@+id/tvMoney"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="540元"
+                        android:textColor="@color/md_black"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/labelMoney"
+                        app:layout_constraintStart_toStartOf="@+id/tvPopulation"
+                        app:layout_constraintTop_toTopOf="@+id/labelMoney"
+                        app:layout_constraintVertical_bias="1.0" />
+
+                    <View
+                        android:id="@+id/divider11"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/md_grey_200"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/labelMoney" />
+
+                    <TextView
+                        android:id="@+id/labelPayType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:text="收款方式"
+                        android:textColor="@color/md_grey_400"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/labelMoney"
+                        app:layout_constraintTop_toBottomOf="@+id/divider11" />
+
+                    <TextView
+                        android:id="@+id/tvPayType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="支付宝"
+                        android:textColor="@color/md_black"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/labelPayType"
+                        app:layout_constraintStart_toStartOf="@+id/tvMoney"
+                        app:layout_constraintTop_toTopOf="@+id/labelPayType"
+                        app:layout_constraintVertical_bias="1.0" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+<!--            <com.google.android.material.card.MaterialCardView-->
+<!--                android:id="@+id/materialCardView3"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:layout_marginEnd="16dp"-->
+<!--                android:layout_marginBottom="16dp"-->
+<!--                app:cardCornerRadius="4dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/materialCardView2">-->
+
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content">-->
+
+<!--                    <View-->
+<!--                        android:id="@+id/divider12"-->
+<!--                        android:layout_width="6dp"-->
+<!--                        android:layout_height="22dp"-->
+<!--                        android:layout_marginStart="16dp"-->
+<!--                        android:background="@color/colorPrimary"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@+id/tvTicketContent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="@+id/tvTicketContent" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/tvTicketContent"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="8dp"-->
+<!--                        android:layout_marginTop="16dp"-->
+<!--                        android:text="出票内容"-->
+<!--                        android:textColor="@color/md_black"-->
+<!--                        android:textSize="20dp"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/divider12"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <View-->
+<!--                        android:id="@+id/divider13"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="1dp"-->
+<!--                        android:layout_marginTop="16dp"-->
+<!--                        android:background="@color/md_grey_200"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintHorizontal_bias="0.0"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/tvTicketContent" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/labelTicketType"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="24dp"-->
+<!--                        android:layout_marginTop="16dp"-->
+<!--                        android:layout_marginBottom="16dp"-->
+<!--                        android:text="出票种类"-->
+<!--                        android:textColor="@color/md_grey_400"-->
+<!--                        android:textSize="18dp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toBottomOf="@+id/divider13" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/tvTicketType"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="36dp"-->
+<!--                        android:text="团队票"-->
+<!--                        android:textColor="@color/md_black"-->
+<!--                        android:textSize="18dp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="@+id/labelTicketType"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/labelTicketType"-->
+<!--                        app:layout_constraintTop_toTopOf="@+id/labelTicketType"-->
+<!--                        app:layout_constraintVertical_bias="1.0" />-->
+
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--            </com.google.android.material.card.MaterialCardView>-->
+
+<!--            <com.flyco.roundview.RoundTextView-->
+<!--                android:id="@+id/rtvBuyTicket"-->
+<!--                android:layout_width="168dp"-->
+<!--                android:layout_height="56dp"-->
+<!--                android:layout_marginTop="32dp"-->
+<!--                android:layout_marginBottom="32dp"-->
+<!--                android:elevation="1dp"-->
+<!--                android:gravity="center"-->
+<!--                android:text="出票"-->
+<!--                android:textColor="@color/md_white"-->
+<!--                android:textSize="20dp"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/materialCardView2"-->
+<!--                app:rv_backgroundColor="@color/colorPrimary"-->
+<!--                app:rv_cornerRadius="4dp" />-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</LinearLayout>
