@@ -70,7 +70,7 @@ class CarQuantityFra : BaseFra() {
     override fun registerEvent() {
         RxBus.registerEvent(this, CarQuantity::class.java, Consumer {
             if (it.isSelected) {
-                tvDescription.text = "合计：${it.quantity * 2}"
+                tvDescription.text = "合计：${it.quantity * 3}"
                 CarTicketScanAct.quantity = it.quantity
             }
         })
