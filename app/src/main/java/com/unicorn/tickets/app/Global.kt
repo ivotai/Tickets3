@@ -12,4 +12,6 @@ object Global {
 
     lateinit var groupApply: GroupApply
 
+     var inventory = 0
+
 }

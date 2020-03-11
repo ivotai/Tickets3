@@ -5,13 +5,17 @@ import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import com.blankj.utilcode.util.ConvertUtils
 import com.unicorn.tickets.R
+import com.unicorn.tickets.app.Global
 import com.unicorn.tickets.app.Key
 import com.unicorn.tickets.app.RxBus
+import com.unicorn.tickets.app.di.ComponentHolder
 import com.unicorn.tickets.app.helper.PrintHelper
+import com.unicorn.tickets.app.observeOnMain
 import com.unicorn.tickets.data.event.PrintGroupApplyEvent
 import com.unicorn.tickets.ui.adapter.pager.BuyTicketPagerAdapter
 import com.unicorn.tickets.ui.base.BaseAct
 import io.reactivex.functions.Consumer
+import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.act_buy_ticket.*
 import net.lucode.hackware.magicindicator.ViewPagerHelper
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator
@@ -70,8 +74,18 @@ class BuyTicketAct : BaseAct() {
         }
 
         titleBar.setTitle("景区售票")
-        initViewPager()
-        initMagicIndicator()
+        // 获取库存
+        fun getInventory() {
+            ComponentHolder.appComponent.api()
+                .getInventory()
+                .observeOnMain(this)
+                .subscribeBy {
+                    Global.inventory = it
+                    initViewPager()
+                    initMagicIndicator()
+                }
+        }
+         getInventory()
     }
 
     override fun registerEvent() {

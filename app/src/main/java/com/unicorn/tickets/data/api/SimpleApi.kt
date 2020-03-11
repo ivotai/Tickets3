@@ -107,4 +107,9 @@ interface SimpleApi {
     @POST("api/v1/pda/batteryCar/order/refund")
     fun refundTicket(@Body refundCarParam: RefundCarParam): Single<BaseResponse<Any>>
 
+    @GET("api/v1/pda/ticket/getInventory")
+    fun getInventory(
+        @Query("travelDate") beginDate: String = DateTime().toString("yyyy-MM-dd")
+    ): Single<Int>
+
 }
