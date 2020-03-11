@@ -20,7 +20,7 @@ abstract class PrintAct : BaseAct() {
 
     protected fun takeTicket(orderId: Long) {
         val mask = DialogHelper.showMask(this)
-        api.takeTicket(TakeTicketParam(orderId))
+        api.takeTicket(TakeTicketParam(orderId = orderId,printType = 1))
             .observeOnMain(this)
             .subscribeBy(
                 onSuccess = {
