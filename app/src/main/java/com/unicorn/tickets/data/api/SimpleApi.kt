@@ -54,11 +54,11 @@ interface SimpleApi {
     ): Single<BaseResponse<PageResponse<Order>>>
 
 
-    @POST("checkin/checkin")
-    fun checkinTicket(@Body checkinTicketParam: CheckinTicketParam): Single<BaseResponse<CvTicketResponse>>
-
-    @POST("checkin/validate")
-    fun validateTicket(@Body validateTicketParam: ValidateTicketParam): Single<BaseResponse<CvTicketResponse>>
+//    @POST("checkin/checkin")
+//    fun checkinTicket(@Body checkinTicketParam: CheckinTicketParam): Single<BaseResponse<CvTicketResponse>>
+//
+//    @POST("checkin/validate")
+//    fun validateTicket(@Body validateTicketParam: ValidateTicketParam): Single<BaseResponse<CvTicketResponse>>
 
 
     @POST("api/v1/pda/ticket/order/refund")

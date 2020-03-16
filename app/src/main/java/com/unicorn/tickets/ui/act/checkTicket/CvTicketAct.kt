@@ -79,12 +79,12 @@ abstract class CvTicketAct : BaseAct() {
     private fun v(ticketCode: String) {
         val mask = DialogHelper.showMask(this)
         // 检票用的独立服务器，需要切换 baseUrl
-        NetworkHelper.switchBaseUrl()
-        api.validateTicket(ValidateTicketParam(ticketCode = ticketCode))
+//        NetworkHelper.switchBaseUrl()
+        checkApi.validateTicket(ValidateTicketParam(ticketCode = ticketCode))
             .observeOnMain(this)
             .subscribeBy(
                 onSuccess = {
-                    NetworkHelper.switchBaseUrl()
+//                    NetworkHelper.switchBaseUrl()
                     mask.dismiss()
                     if (it.success) validateTicketSuccess(it.data)
                     // 现在失败理由暂时放在 message 里
@@ -92,7 +92,7 @@ abstract class CvTicketAct : BaseAct() {
                     finishIfNeed()
                 },
                 onError = {
-                    NetworkHelper.switchBaseUrl()
+//                    NetworkHelper.switchBaseUrl()
                     mask.dismiss()
                     ExceptionHelper.showPrompt(it)
                 }
@@ -119,12 +119,12 @@ abstract class CvTicketAct : BaseAct() {
 
     private fun c(ticketCode: String) {
         val mask = DialogHelper.showMask(this)
-        NetworkHelper.switchBaseUrl()
-        api.checkinTicket(CheckinTicketParam(ticketCode = ticketCode))
+//        NetworkHelper.switchBaseUrl()
+        checkApi.checkinTicket(CheckinTicketParam(ticketCode = ticketCode))
             .observeOnMain(this)
             .subscribeBy(
                 onSuccess = {
-                    NetworkHelper.switchBaseUrl()
+//                    NetworkHelper.switchBaseUrl()
                     mask.dismiss()
                     if (it.data.returnCode == "00") checkinTicketSuccess(it.data)
                     else checkinTicketFailed(it.data.message)
@@ -132,7 +132,7 @@ abstract class CvTicketAct : BaseAct() {
                     finishIfNeed()
                 },
                 onError = {
-                    NetworkHelper.switchBaseUrl()
+//                    NetworkHelper.switchBaseUrl()
                     mask.dismiss()
                     ExceptionHelper.showPrompt(it)
                 }

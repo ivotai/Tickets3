@@ -4,7 +4,6 @@ import com.unicorn.tickets.app.Configs
 import com.unicorn.tickets.app.Global
 import com.unicorn.tickets.app.Key
 import com.unicorn.tickets.app.di.ComponentHolder
-import me.jessyan.retrofiturlmanager.RetrofitUrlManager
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -26,11 +25,11 @@ object NetworkHelper {
 
     private var checkin = false
 
-    fun switchBaseUrl() {
-        RetrofitUrlManager.getInstance()
-            .setGlobalDomain(if (checkin) Configs.baseUrl else Configs.checkinBaseUrl)
-        checkin = !checkin
-    }
+//    fun switchBaseUrl() {
+//        RetrofitUrlManager.getInstance()
+//            .setGlobalDomain(if (checkin) Configs.baseUrl else Configs.checkinBaseUrl)
+//        checkin = !checkin
+//    }
 
     private val api by lazy { ComponentHolder.appComponent.api() }
 

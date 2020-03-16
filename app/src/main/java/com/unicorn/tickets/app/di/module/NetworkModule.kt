@@ -2,21 +2,24 @@ package com.unicorn.tickets.app.di.module
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.unicorn.tickets.app.Configs
+import com.unicorn.tickets.app.V1
+import com.unicorn.tickets.app.V2
 import com.unicorn.tickets.app.helper.NetworkHelper
 import dagger.Module
 import dagger.Provides
-import me.jessyan.retrofiturlmanager.RetrofitUrlManager
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
 class NetworkModule {
 
+    @Named(V1)
     @Singleton
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
@@ -38,15 +41,35 @@ class NetworkModule {
                 level = HttpLoggingInterceptor.Level.BODY
             })
             .addNetworkInterceptor(StethoInterceptor())
-        return RetrofitUrlManager.getInstance().with(builder).build()
+//        return RetrofitUrlManager.getInstance().with(builder).build()
+        return  builder.build()
     }
 
+    @Named(V1)
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    fun provideRetrofit(@Named(V1) okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(Configs.baseUrl)
             .client(okHttpClient)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    @Named(V2)
+    @Singleton
+    @Provides
+    fun provideRetrofit2(): Retrofit {
+        val builder = OkHttpClient.Builder()
+            .readTimeout(30, TimeUnit.SECONDS)
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            })
+            .addNetworkInterceptor(StethoInterceptor())
+        return Retrofit.Builder()
+            .baseUrl(Configs.checkinBaseUrl)
+            .client(builder.build())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()

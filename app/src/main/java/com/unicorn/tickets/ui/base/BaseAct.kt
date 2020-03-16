@@ -29,4 +29,6 @@ abstract class BaseAct : AppCompatActivity(), UI {
 
     protected val api = ComponentHolder.appComponent.api()
 
+    protected val checkApi = ComponentHolder.appComponent.checkApi()
+
 }
