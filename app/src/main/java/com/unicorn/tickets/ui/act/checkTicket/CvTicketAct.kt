@@ -112,8 +112,10 @@ abstract class CvTicketAct : BaseAct() {
                 assetFileDescriptor.startOffset,
                 assetFileDescriptor.length
             )
-            setOnPreparedListener { it.start() }
-            prepareAsync()
+//            setOnPreparedListener { it.start() }
+//            prepareAsync()
+            prepare()
+            start()
         }
     }
 
