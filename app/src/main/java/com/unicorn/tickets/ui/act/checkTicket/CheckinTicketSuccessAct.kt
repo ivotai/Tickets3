@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat
 import cn.iwgang.simplifyspan.SimplifySpanBuild
 import cn.iwgang.simplifyspan.unit.SpecialTextUnit
 import com.blankj.utilcode.util.DeviceUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.github.florent37.rxsharedpreferences.RxSharedPreferences
 import com.unicorn.tickets.R
 import com.unicorn.tickets.app.Configs
@@ -23,6 +24,7 @@ import kotlinx.android.synthetic.main.act_checkin_ticket_success.tvPrompt
 import kotlinx.android.synthetic.main.act_checkin_ticket_success.tvSourceTypeText
 import kotlinx.android.synthetic.main.act_checkin_ticket_success.tvTicketType
 import org.joda.time.DateTime
+import java.lang.Exception
 
 class CheckinTicketSuccessAct : BaseAct() {
 
@@ -54,7 +56,11 @@ class CheckinTicketSuccessAct : BaseAct() {
     }
 
     override fun bindIntent() {
-        playMedia()
+        try {
+            playMedia()
+        } catch (e: Exception) {
+            ToastUtils.showShort("播放提示音错误")
+        }
         llContinueScanTicketCode.safeClicks().subscribe {
             finish()
             RxBus.post(ScanTicketCodeEvent())
@@ -74,8 +80,8 @@ class CheckinTicketSuccessAct : BaseAct() {
                 assetFileDescriptor.startOffset,
                 assetFileDescriptor.length
             )
-            setOnPreparedListener { it.start() }
-            prepareAsync()
+            prepare()
+            start()
         }
     }
 

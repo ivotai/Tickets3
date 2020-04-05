@@ -3,6 +3,7 @@ package com.unicorn.tickets.ui.act.checkTicket
 import android.graphics.Color
 import android.media.MediaPlayer
 import com.blankj.utilcode.util.DeviceUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.github.florent37.rxsharedpreferences.RxSharedPreferences
 import com.unicorn.tickets.R
 import com.unicorn.tickets.app.Configs
@@ -14,6 +15,7 @@ import com.unicorn.tickets.data.event.ScanTicketCodeEvent
 import com.unicorn.tickets.ui.base.BaseAct
 import kotlinx.android.synthetic.main.act_checkin_ticket_failed.*
 import org.joda.time.DateTime
+import java.lang.Exception
 
 class CheckinTicketFailedAct : BaseAct() {
 
@@ -29,7 +31,11 @@ class CheckinTicketFailedAct : BaseAct() {
     }
 
     override fun bindIntent() {
-        playMedia()
+        try {
+            playMedia()
+        } catch (e: Exception) {
+            ToastUtils.showShort("播放提示音错误")
+        }
         llContinueScanTicketCode.safeClicks().subscribe {
             finish()
             RxBus.post(ScanTicketCodeEvent())
@@ -39,7 +45,7 @@ class CheckinTicketFailedAct : BaseAct() {
     private val mediaPlayer = MediaPlayer()
 
     private fun playMedia() {
-        val fileName =  "err.mp3"
+        val fileName = "err.mp3"
         val assetFileDescriptor = assets.openFd(fileName)
         with(mediaPlayer) {
             reset()
@@ -48,8 +54,8 @@ class CheckinTicketFailedAct : BaseAct() {
                 assetFileDescriptor.startOffset,
                 assetFileDescriptor.length
             )
-            setOnPreparedListener { it.start() }
-            prepareAsync()
+            prepare()
+            start()
         }
     }
 
