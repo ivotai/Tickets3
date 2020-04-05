@@ -18,6 +18,7 @@ abstract class ScanTicketCodeAct : BaseAct() {
     override fun bindIntent() {
         sunmiScannerHelper = SunmiScannerHelper(this, object : SunmiScannerHelper.ScanListener {
             override fun onScanResult(result: String) {
+                // 假如是下一个界面传来的扫码结果，关闭下一个界面
                 val top = ActivityUtils.getTopActivity()
                 if (this@ScanTicketCodeAct != top) top.finish()
                 onTicketCodeGet(result)
@@ -81,7 +82,6 @@ abstract class ScanTicketCodeAct : BaseAct() {
                 },
                 onError = {
                     mask.dismiss()
-                    if (it is UndeliverableException) return@subscribeBy
                     ExceptionHelper.showPrompt(it)
                 }
             )
