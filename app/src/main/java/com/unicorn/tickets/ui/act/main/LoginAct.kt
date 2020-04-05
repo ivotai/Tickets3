@@ -1,5 +1,8 @@
 package com.unicorn.tickets.ui.act.main
 
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.list.listItemsSingleChoice
+import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.github.florent37.rxsharedpreferences.RxSharedPreferences
 import com.unicorn.tickets.app.*
@@ -7,8 +10,10 @@ import com.unicorn.tickets.app.helper.DialogHelper
 import com.unicorn.tickets.app.helper.ExceptionHelper
 import com.unicorn.tickets.app.helper.UpdateHelper
 import com.unicorn.tickets.ui.base.BaseAct
+import io.reactivex.Observable
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.act_login.*
+import java.util.concurrent.TimeUnit
 
 class LoginAct : BaseAct() {
 
@@ -29,6 +34,21 @@ class LoginAct : BaseAct() {
 
     override fun bindIntent() {
         rtvLogin.safeClicks().subscribe { loginX() }
+
+        tvChangeCheckBaseUrl.safeClicks().subscribe {
+            val items = listOf(Configs.remoteCheckinBaseUrl, Configs.localCheckinBaseUrl)
+            val initialSelection = items.indexOf(AppInfo.checkBaseUrl)
+            MaterialDialog(this).show {
+                title(text = "请选择检票服务器地址，切换后将会自动重启应用")
+                listItemsSingleChoice(
+                    items = items,
+                    initialSelection = initialSelection
+                ) { _, _, text ->
+                    AppInfo.checkBaseUrl = text
+                    AppUtils.relaunchApp(true)
+                }
+            }
+        }
     }
 
     // login 的加强版

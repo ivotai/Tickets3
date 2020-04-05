@@ -18,7 +18,11 @@ object Configs {
 
 //    const val checkinBaseUrl = "http://192.168.239.103/"
 
-    const val checkinBaseUrl = "https://tc.csnbgsh.com:9016/"
+    const val remoteCheckinBaseUrl = "https://tc.csnbgsh.com:9016/"
+
+    const val localCheckinBaseUrl = "http://192.168.239.101:8080/"
+
+    const val keyCheckinBaseUrl = "keyCheckinBaseUrl"
 
     const val displayDateFormat = "yyyy-MM-dd"
 

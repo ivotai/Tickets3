@@ -1,6 +1,7 @@
 package com.unicorn.tickets.app
 
 import androidx.multidex.MultiDexApplication
+import com.chibatching.kotpref.Kotpref
 import com.facebook.stetho.Stetho
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
@@ -14,6 +15,7 @@ class App : MultiDexApplication() {
         super.onCreate()
         Logger.addLogAdapter(AndroidLogAdapter())
         Stetho.initializeWithDefaults(this)
+        Kotpref.init(this)
         init()
     }
 

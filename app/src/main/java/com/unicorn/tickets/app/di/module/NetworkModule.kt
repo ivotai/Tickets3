@@ -1,6 +1,7 @@
 package com.unicorn.tickets.app.di.module
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
+import com.unicorn.tickets.app.AppInfo
 import com.unicorn.tickets.app.Configs
 import com.unicorn.tickets.app.V1
 import com.unicorn.tickets.app.V2
@@ -41,7 +42,6 @@ class NetworkModule {
                 level = HttpLoggingInterceptor.Level.BODY
             })
             .addNetworkInterceptor(StethoInterceptor())
-//        return RetrofitUrlManager.getInstance().with(builder).build()
         return  builder.build()
     }
 
@@ -68,7 +68,7 @@ class NetworkModule {
             })
             .addNetworkInterceptor(StethoInterceptor())
         return Retrofit.Builder()
-            .baseUrl(Configs.checkinBaseUrl)
+            .baseUrl(AppInfo.checkBaseUrl)
             .client(builder.build())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())

@@ -28,7 +28,6 @@ import io.reactivex.functions.Consumer
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.act_car_order.*
 import kotlinx.android.synthetic.main.act_car_order.titleBar
-import kotlinx.android.synthetic.main.act_login.*
 import org.joda.time.DateTime
 
 class CarOrderAct : SimplePageAct<CarOrder, KVHolder>() {

@@ -11,7 +11,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 22
         versionCode 1
-        versionName "1.0.4"
+        versionName "1.0.5"
     }
     signingConfigs {
         release {
@@ -42,7 +42,7 @@ android {
 }
 
 dependencies {
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     // androidx
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
@@ -90,7 +90,8 @@ dependencies {
     implementation 'com.kaopiz:kprogresshud:1.0.2'
     implementation 'cat.ereza:customactivityoncrash:2.2.0'
     implementation 'com.zhy:okhttputils:2.6.2'
-     implementation 'com.shuhart.stepview:stepview:1.5.0'
+    implementation 'com.shuhart.stepview:stepview:1.5.0'
+    implementation 'com.chibatching.kotpref:kotpref:2.10.0'
 }
 
 androidExtensions {
