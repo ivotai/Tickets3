@@ -6,11 +6,9 @@ import com.blankj.utilcode.util.ToastUtils
 import com.unicorn.tickets.app.Key
 import com.unicorn.tickets.app.helper.DialogHelper
 import com.unicorn.tickets.app.helper.ExceptionHelper
-import com.unicorn.tickets.app.helper.NetworkHelper
 import com.unicorn.tickets.app.observeOnMain
 import com.unicorn.tickets.data.model.CheckinTicketParam
 import com.unicorn.tickets.data.model.CvTicketResponse
-import com.unicorn.tickets.data.model.ValidateTicketParam
 import com.unicorn.tickets.ui.act.main.SunmiScannerHelper
 import com.unicorn.tickets.ui.base.BaseAct
 import io.reactivex.exceptions.UndeliverableException
@@ -18,36 +16,23 @@ import io.reactivex.rxkotlin.subscribeBy
 
 abstract class BaseScanTicketCodeAct : BaseAct() {
 
-    companion object {
-        var isCheckin = true
-        val cv: String
-            get() {
-                return if (isCheckin) "检票" else "验票"
-            }
-    }
-
-    private lateinit var sunmiScannerHelper: SunmiScannerHelper
-
     override fun bindIntent() {
         sunmiScannerHelper = SunmiScannerHelper(this, object : SunmiScannerHelper.ScanListener {
             override fun onScanResult(result: String) {
-                cv(result)
+                onTicketCodeGet(result)
             }
         })
     }
 
-    override fun onDestroy() {
-        sunmiScannerHelper.release()
-        super.onDestroy()
-    }
-
     protected fun scanTicketCode() {
         if (sunmiScannerHelper.scannerModel in listOf(103, 106, 107)) {
-            DialogHelper.showCvingDialog(this, cv)
+            DialogHelper.showScaningDialog(this)
             sunmiScannerHelper.scan()
         } else
             startSunmiQrcodeScanner()
     }
+
+    private val qrcodeRequestCode = 1
 
     private fun startSunmiQrcodeScanner() {
         val intent = Intent("com.summi.scan")
@@ -64,35 +49,31 @@ abstract class BaseScanTicketCodeAct : BaseAct() {
                 val result = bundle!!.getSerializable("data") as ArrayList<*>
                 val hashMap = result[0] as HashMap<*, *>
                 val value = hashMap["VALUE"] as String
-                cv(value)
+                onTicketCodeGet(value)
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    private fun cv(ticketCode: String) {
-        if (isCheckin) c(ticketCode)
-        else v(ticketCode)
+    private fun onTicketCodeGet(ticketCode: String) {
+        checkinTicket(ticketCode)
     }
 
-    private fun v(ticketCode: String) {
+    private fun checkinTicket(ticketCode: String) {
         val mask = DialogHelper.showMask(this)
-        // 检票用的独立服务器，需要切换 baseUrl
-//        NetworkHelper.switchBaseUrl()
-        checkApi.validateTicket(ValidateTicketParam(ticketCode = ticketCode))
+        checkApi.checkinTicket(CheckinTicketParam(ticketCode = ticketCode))
             .observeOnMain(this)
             .subscribeBy(
                 onSuccess = {
-                    //                    NetworkHelper.switchBaseUrl()
                     mask.dismiss()
-                    if (it.success) validateTicketSuccess(it.data)
-                    // 现在失败理由暂时放在 message 里
-                    else checkinTicketFailed(it.message)
-                    finishIfNeed()
+                    val success = it.data.returnCode == "00"
+                    if (success) checkinTicketSuccess(it.data)
+                    else checkinTicketFailed(it.data.message)
+
                 },
                 onError = {
-                    //                    NetworkHelper.switchBaseUrl()
                     mask.dismiss()
+                    if (it is UndeliverableException) return@subscribeBy
                     ExceptionHelper.showPrompt(it)
                 }
             )
@@ -118,26 +99,7 @@ abstract class BaseScanTicketCodeAct : BaseAct() {
         }
     }
 
-    private fun c(ticketCode: String) {
-        val mask = DialogHelper.showMask(this)
-//        NetworkHelper.switchBaseUrl()
-        checkApi.checkinTicket(CheckinTicketParam(ticketCode = ticketCode))
-            .observeOnMain(this)
-            .subscribeBy(
-                onSuccess = {
-                    mask.dismiss()
-                    if (it.data.returnCode == "00") checkinTicketSuccess(it.data)
-                    else checkinTicketFailed(it.data.message)
-                    playMedia(it.data.returnCode == "00", it.data.peopleCount)
-                    finishIfNeed()
-                },
-                onError = {
-                    mask.dismiss()
-                    if (it is UndeliverableException) return@subscribeBy
-                    ExceptionHelper.showPrompt(it)
-                }
-            )
-    }
+
 
     private fun checkinTicketSuccess(cvTicketResponse: CvTicketResponse) {
         Intent(this, CheckinTicketSuccessAct::class.java).apply {
@@ -157,11 +119,12 @@ abstract class BaseScanTicketCodeAct : BaseAct() {
         }.let { startActivity(it) }
     }
 
-    private fun finishIfNeed() {
-//        if (shouldFinish)
-            finish()
+    private lateinit var sunmiScannerHelper: SunmiScannerHelper
+
+    override fun onDestroy() {
+        sunmiScannerHelper.release()
+        super.onDestroy()
     }
 
-    private val qrcodeRequestCode = 1
 
 }

@@ -36,8 +36,8 @@ object DialogHelper {
         view.dialog.show()
     }
 
-    fun showCvingDialog(context: Context, cv: String) {
-        val view = CvingDialogView(context, cv)
+    fun showScaningDialog(context: Context) {
+        val view = CvingDialogView(context, "检票")
         view.dialog = createDialog(context, view)
         view.dialog.show()
         Observable.timer(2, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {

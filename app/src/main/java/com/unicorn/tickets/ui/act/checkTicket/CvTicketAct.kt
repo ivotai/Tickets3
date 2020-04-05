@@ -6,7 +6,6 @@ import com.blankj.utilcode.util.ToastUtils
 import com.unicorn.tickets.app.Key
 import com.unicorn.tickets.app.helper.DialogHelper
 import com.unicorn.tickets.app.helper.ExceptionHelper
-import com.unicorn.tickets.app.helper.NetworkHelper
 import com.unicorn.tickets.app.observeOnMain
 import com.unicorn.tickets.data.model.CheckinTicketParam
 import com.unicorn.tickets.data.model.CvTicketResponse
@@ -45,7 +44,7 @@ abstract class CvTicketAct : BaseAct() {
 
     protected fun scanTicketCode() {
         if (sunmiScannerHelper.scannerModel in listOf(103, 106, 107)) {
-            DialogHelper.showCvingDialog(this, cv)
+            DialogHelper.showScaningDialog(this, cv)
             sunmiScannerHelper.scan()
         } else
             startSunmiQrcodeScanner()
