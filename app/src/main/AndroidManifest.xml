@@ -35,7 +35,7 @@
         <activity android:name=".ui.act.team.TeamAct" />
         <activity android:name=".ui.act.team.TeamDetailAct" />
         <activity android:name=".ui.act.stateStatistic.StateStatisticAct" />
-        <activity android:name=".ui.act.main.CvMenuAct" />
+        <activity android:name=".ui.act.main.ScanTicketCodeAct" />
         <activity android:name=".ui.act.car.BatteryCarAct"
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.act.car.CarTicketScanAct"
