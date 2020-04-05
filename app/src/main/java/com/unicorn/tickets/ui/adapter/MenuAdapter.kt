@@ -36,14 +36,14 @@ class MenuAdapter : BaseQuickAdapter<Menu, KVHolder>(R.layout.item_menu) {
                         context.startAct(StateStatisticAct::class.java)
                     SystemSetting ->
                         "尚未开发".toast()
-                    CheckinTicket -> {
-                        CvTicketAct.isCheckin = true
-                        RxBus.post(ScanTicketCodeEvent())
-                    }
-                    ValidateTicket -> {
-                        CvTicketAct.isCheckin = false
-                        RxBus.post(ScanTicketCodeEvent())
-                    }
+//                    CheckinTicket -> {
+//                        CvTicketAct.isCheckin = true
+//                        RxBus.post(ScanTicketCodeEvent())
+//                    }
+//                    ValidateTicket -> {
+//                        CvTicketAct.isCheckin = false
+//                        RxBus.post(ScanTicketCodeEvent())
+//                    }
                 }
             }
         }

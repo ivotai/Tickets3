@@ -44,7 +44,7 @@ abstract class CvTicketAct : BaseAct() {
 
     protected fun scanTicketCode() {
         if (sunmiScannerHelper.scannerModel in listOf(103, 106, 107)) {
-            DialogHelper.showScaningDialog(this, cv)
+            DialogHelper.showScaningDialog(this)
             sunmiScannerHelper.scan()
         } else
             startSunmiQrcodeScanner()
@@ -153,7 +153,7 @@ abstract class CvTicketAct : BaseAct() {
     }
 
     private fun checkinTicketFailed(failReason: String) {
-        Intent(this, CvTicketFailedAct::class.java).apply {
+        Intent(this, CheckinTicketFailedAct::class.java).apply {
             putExtra(Key.FailReason, failReason)
         }.let { startActivity(it) }
     }

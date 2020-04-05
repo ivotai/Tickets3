@@ -1,14 +1,12 @@
 package com.unicorn.tickets.ui.act.checkTicket
 
 import android.content.Intent
-import android.media.MediaPlayer
 import com.blankj.utilcode.util.ToastUtils
 import com.unicorn.tickets.app.Key
 import com.unicorn.tickets.app.helper.DialogHelper
 import com.unicorn.tickets.app.helper.ExceptionHelper
 import com.unicorn.tickets.app.observeOnMain
 import com.unicorn.tickets.data.model.CheckinTicketParam
-import com.unicorn.tickets.data.model.CvTicketResponse
 import com.unicorn.tickets.ui.act.main.SunmiScannerHelper
 import com.unicorn.tickets.ui.base.BaseAct
 import io.reactivex.exceptions.UndeliverableException
@@ -71,8 +69,12 @@ abstract class ScanTicketCodeAct : BaseAct() {
                         Intent(this, CheckinTicketSuccessAct::class.java).apply {
                             putExtra(Key.Param, response.data)
                         }.let { startActivity(it) }
-                    } else checkinTicketFailed(response.data.message)
-
+                    } else {
+                        val failReason = response.data.message
+                        Intent(this, CheckinTicketFailedAct::class.java).apply {
+                            putExtra(Key.PayOrderResponse, failReason)
+                        }.let { startActivity(it) }
+                    }
                 },
                 onError = {
                     mask.dismiss()
@@ -80,12 +82,6 @@ abstract class ScanTicketCodeAct : BaseAct() {
                     ExceptionHelper.showPrompt(it)
                 }
             )
-    }
-
-    private fun checkinTicketFailed(failReason: String) {
-        Intent(this, CvTicketFailedAct::class.java).apply {
-            putExtra(Key.FailReason, failReason)
-        }.let { startActivity(it) }
     }
 
     private lateinit var sunmiScannerHelper: SunmiScannerHelper

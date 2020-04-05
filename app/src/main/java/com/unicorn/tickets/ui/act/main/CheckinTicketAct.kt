@@ -6,8 +6,11 @@ import com.jakewharton.rxbinding3.view.clicks
 import com.unicorn.tickets.R
 import com.unicorn.tickets.app.Configs
 import com.unicorn.tickets.app.Global
+import com.unicorn.tickets.app.RxBus
 import com.unicorn.tickets.app.safeClicks
+import com.unicorn.tickets.data.event.ScanTicketCodeEvent
 import com.unicorn.tickets.ui.act.checkTicket.ScanTicketCodeAct
+import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.act_scan_ticket_code.*
 import org.joda.time.DateTime
 
@@ -28,6 +31,12 @@ class CheckinTicketAct : ScanTicketCodeAct() {
         super.bindIntent()
         ivSignOut.clicks().mergeWith(tvSignOut.clicks()).subscribe { finish() }
         llScanTicketCode.safeClicks().subscribe { scanTicketCode() }
+    }
+
+    override fun registerEvent() {
+        RxBus.registerEvent(this, ScanTicketCodeEvent::class.java, Consumer {
+            scanTicketCode()
+        })
     }
 
     override val layoutId = R.layout.act_scan_ticket_code

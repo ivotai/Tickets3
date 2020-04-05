@@ -30,7 +30,7 @@
         <activity android:name=".ui.act.orderSearch.OrderSearchAct" />
         <activity android:name=".ui.act.checkTicket.CheckinTicketSuccessAct" />
         <activity android:name=".ui.act.checkTicket.ValidateTicketSuccessAct" />
-        <activity android:name=".ui.act.checkTicket.CvTicketFailedAct" />
+        <activity android:name=".ui.act.checkTicket.CheckinTicketFailedAct" />
         <activity android:name=".ui.act.OrderDetailAct" />
         <activity android:name=".ui.act.team.TeamAct" />
         <activity android:name=".ui.act.team.TeamDetailAct" />

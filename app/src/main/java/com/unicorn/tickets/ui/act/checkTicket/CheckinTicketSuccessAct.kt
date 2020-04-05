@@ -9,8 +9,10 @@ import com.github.florent37.rxsharedpreferences.RxSharedPreferences
 import com.unicorn.tickets.R
 import com.unicorn.tickets.app.Configs
 import com.unicorn.tickets.app.Key
+import com.unicorn.tickets.app.RxBus
 import com.unicorn.tickets.app.helper.AppHelper
 import com.unicorn.tickets.app.safeClicks
+import com.unicorn.tickets.data.event.ScanTicketCodeEvent
 import com.unicorn.tickets.data.model.CvTicketResponse
 import com.unicorn.tickets.ui.base.BaseAct
 import kotlinx.android.synthetic.main.act_checkin_ticket_success.*
@@ -53,8 +55,9 @@ class CheckinTicketSuccessAct : BaseAct() {
 
     override fun bindIntent() {
         playMedia()
-        tvContinueScanTicketCode.safeClicks().subscribe {
-
+        llContinueScanTicketCode.safeClicks().subscribe {
+            RxBus.post(ScanTicketCodeEvent())
+            finish()
         }
     }
 
