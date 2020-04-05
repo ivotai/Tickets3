@@ -14,7 +14,7 @@ import com.unicorn.tickets.ui.base.BaseAct
 import io.reactivex.exceptions.UndeliverableException
 import io.reactivex.rxkotlin.subscribeBy
 
-abstract class BaseScanTicketCodeAct : BaseAct() {
+abstract class ScanTicketCodeAct : BaseAct() {
 
     override fun bindIntent() {
         sunmiScannerHelper = SunmiScannerHelper(this, object : SunmiScannerHelper.ScanListener {
@@ -64,11 +64,14 @@ abstract class BaseScanTicketCodeAct : BaseAct() {
         checkApi.checkinTicket(CheckinTicketParam(ticketCode = ticketCode))
             .observeOnMain(this)
             .subscribeBy(
-                onSuccess = {
+                onSuccess = { response ->
                     mask.dismiss()
-                    val success = it.data.returnCode == "00"
-                    if (success) checkinTicketSuccess(it.data)
-                    else checkinTicketFailed(it.data.message)
+                    val success = response.data.returnCode == "00"
+                    if (success) {
+                        Intent(this, CheckinTicketSuccessAct::class.java).apply {
+                            putExtra(Key.Param, response.data)
+                        }.let { startActivity(it) }
+                    } else checkinTicketFailed(response.data.message)
 
                 },
                 onError = {
@@ -77,40 +80,6 @@ abstract class BaseScanTicketCodeAct : BaseAct() {
                     ExceptionHelper.showPrompt(it)
                 }
             )
-    }
-
-    private val mediaPlayer = MediaPlayer()
-
-    private fun playMedia(success: Boolean, peopleCount: Int) {
-        var fileName = if (peopleCount in 1..9) "suc_0$peopleCount.mp3" else "err.mp3"
-        if (!success) fileName = "err.mp3"
-        val assetFileDescriptor = assets.openFd(fileName)
-        with(mediaPlayer) {
-            reset()
-            setDataSource(
-                assetFileDescriptor.fileDescriptor,
-                assetFileDescriptor.startOffset,
-                assetFileDescriptor.length
-            )
-//            setOnPreparedListener { it.start() }
-//            prepareAsync()
-            prepare()
-            start()
-        }
-    }
-
-
-
-    private fun checkinTicketSuccess(cvTicketResponse: CvTicketResponse) {
-        Intent(this, CheckinTicketSuccessAct::class.java).apply {
-            putExtra(Key.CvTicketResponse, cvTicketResponse)
-        }.let { startActivity(it) }
-    }
-
-    private fun validateTicketSuccess(cvTicketResponse: CvTicketResponse) {
-        Intent(this, ValidateTicketSuccessAct::class.java).apply {
-            putExtra(Key.CvTicketResponse, cvTicketResponse)
-        }.let { startActivity(it) }
     }
 
     private fun checkinTicketFailed(failReason: String) {

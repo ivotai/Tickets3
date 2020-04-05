@@ -154,7 +154,7 @@
             android:src="@mipmap/icon_sweep_code" />
 
         <TextView
-            android:id="@+id/tvCv"
+            android:id="@+id/tvContinueScanTicketCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"

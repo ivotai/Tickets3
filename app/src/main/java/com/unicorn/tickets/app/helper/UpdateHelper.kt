@@ -9,7 +9,7 @@ import com.unicorn.tickets.app.di.ComponentHolder
 import com.unicorn.tickets.app.observeOnMain
 import com.unicorn.tickets.app.startAct
 import com.unicorn.tickets.ui.act.car.BatteryCarAct
-import com.unicorn.tickets.ui.act.main.ScanTicketCodeAct
+import com.unicorn.tickets.ui.act.main.CheckinTicketAct
 import com.unicorn.tickets.ui.act.main.MenuAct
 import com.zhy.http.okhttp.OkHttpUtils
 import com.zhy.http.okhttp.callback.FileCallBack
@@ -30,7 +30,7 @@ object UpdateHelper {
                     else
                         activity.startAct(
                             when (Global.loginResponse.user.roleTag) {
-                                "002" -> ScanTicketCodeAct::class.java
+                                "002" -> CheckinTicketAct::class.java
                                 "003" -> BatteryCarAct::class.java
                                 else -> MenuAct::class.java
                             }

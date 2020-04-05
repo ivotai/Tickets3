@@ -1,5 +1,6 @@
 package com.unicorn.tickets.ui.act.checkTicket
 
+import android.media.MediaPlayer
 import androidx.core.content.ContextCompat
 import cn.iwgang.simplifyspan.SimplifySpanBuild
 import cn.iwgang.simplifyspan.unit.SpecialTextUnit
@@ -11,21 +12,17 @@ import com.unicorn.tickets.app.Key
 import com.unicorn.tickets.app.helper.AppHelper
 import com.unicorn.tickets.app.safeClicks
 import com.unicorn.tickets.data.model.CvTicketResponse
-import com.unicorn.tickets.data.model.SourceType
+import com.unicorn.tickets.ui.base.BaseAct
 import kotlinx.android.synthetic.main.act_checkin_ticket_success.*
 import kotlinx.android.synthetic.main.act_checkin_ticket_success.constraintLayout
-import kotlinx.android.synthetic.main.act_checkin_ticket_success.llCv
 import kotlinx.android.synthetic.main.act_checkin_ticket_success.titleBar
 import kotlinx.android.synthetic.main.act_checkin_ticket_success.tvAndroidId
 import kotlinx.android.synthetic.main.act_checkin_ticket_success.tvPrompt
 import kotlinx.android.synthetic.main.act_checkin_ticket_success.tvSourceTypeText
 import kotlinx.android.synthetic.main.act_checkin_ticket_success.tvTicketType
-import kotlinx.android.synthetic.main.act_validate_ticket_success.*
 import org.joda.time.DateTime
 
-class CheckinTicketSuccessAct : CvTicketAct() {
-
-    override val layoutId = R.layout.act_checkin_ticket_success
+class CheckinTicketSuccessAct : BaseAct() {
 
     override fun initViews() {
         titleBar.setTitle("检票成功")
@@ -37,7 +34,10 @@ class CheckinTicketSuccessAct : CvTicketAct() {
                 .append("人")
                 .build()
             tvPrompt.text = "本日检票${checkinCount + 1}人"
-            tvDate.text = "有效日期：${DateTime(beginTravelDate).toString("yyyy-MM-dd")} 至 ${DateTime(endTravelDate).toString("yyyy-MM-dd")}"
+            tvDate.text =
+                "有效日期：${DateTime(beginTravelDate).toString("yyyy-MM-dd")} 至 ${DateTime(endTravelDate).toString(
+                    "yyyy-MM-dd"
+                )}"
         }
 
 
@@ -52,10 +52,32 @@ class CheckinTicketSuccessAct : CvTicketAct() {
     }
 
     override fun bindIntent() {
-        super.bindIntent()
-        llCv.safeClicks().subscribe { scanTicketCode() }
+        playMedia()
+        tvContinueScanTicketCode.safeClicks().subscribe {
+
+        }
     }
 
-    private val checkinTicketResponse by lazy { intent.getSerializableExtra(Key.CvTicketResponse) as CvTicketResponse }
+    private val mediaPlayer = MediaPlayer()
+
+    private fun playMedia() {
+        val peopleCount = checkinTicketResponse.peopleCount
+        val fileName = if (peopleCount in 1..9) "suc_0$peopleCount.mp3" else "suc_01.mp3"
+        val assetFileDescriptor = assets.openFd(fileName)
+        with(mediaPlayer) {
+            reset()
+            setDataSource(
+                assetFileDescriptor.fileDescriptor,
+                assetFileDescriptor.startOffset,
+                assetFileDescriptor.length
+            )
+            setOnPreparedListener { it.start() }
+            prepareAsync()
+        }
+    }
+
+    private val checkinTicketResponse by lazy { intent.getSerializableExtra(Key.Param) as CvTicketResponse }
+
+    override val layoutId = R.layout.act_checkin_ticket_success
 
 }

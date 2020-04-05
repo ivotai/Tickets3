@@ -18,4 +18,7 @@ object Key{
 
     const val FailReason = "FailReason"
 
+    const val Param = "Param"
+
+
 }

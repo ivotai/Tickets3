@@ -7,11 +7,11 @@ import com.unicorn.tickets.R
 import com.unicorn.tickets.app.Configs
 import com.unicorn.tickets.app.Global
 import com.unicorn.tickets.app.safeClicks
-import com.unicorn.tickets.ui.act.checkTicket.BaseScanTicketCodeAct
+import com.unicorn.tickets.ui.act.checkTicket.ScanTicketCodeAct
 import kotlinx.android.synthetic.main.act_scan_ticket_code.*
 import org.joda.time.DateTime
 
-class ScanTicketCodeAct : BaseScanTicketCodeAct() {
+class CheckinTicketAct : ScanTicketCodeAct() {
 
     override fun initViews() {
         fun displayInfo() {
@@ -27,10 +27,7 @@ class ScanTicketCodeAct : BaseScanTicketCodeAct() {
     override fun bindIntent() {
         super.bindIntent()
         ivSignOut.clicks().mergeWith(tvSignOut.clicks()).subscribe { finish() }
-        llCheckin.safeClicks().subscribe {
-            isCheckin = true
-            scanTicketCode()
-        }
+        llScanTicketCode.safeClicks().subscribe { scanTicketCode() }
     }
 
     override val layoutId = R.layout.act_scan_ticket_code
