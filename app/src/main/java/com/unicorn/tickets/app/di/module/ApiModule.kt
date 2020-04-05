@@ -14,7 +14,7 @@ import javax.inject.Named
 class ApiModule {
 
     @Provides
-    fun api(@Named(V1) retrofit: Retrofit): SimpleApi = retrofit.create(SimpleApi::class.java)
+    fun simpleApi(@Named(V1) retrofit: Retrofit): SimpleApi = retrofit.create(SimpleApi::class.java)
 
     @Provides
     fun checkApi(@Named(V2) retrofit: Retrofit): CheckApi = retrofit.create(CheckApi::class.java)
