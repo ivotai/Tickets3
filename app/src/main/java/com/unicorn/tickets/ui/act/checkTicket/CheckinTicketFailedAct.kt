@@ -25,15 +25,14 @@ class CheckinTicketFailedAct : BaseAct() {
         RxSharedPreferences.with(this).getString(Key.Username, "").subscribe {
             tvUsername.text = "检票人：$it"
         }
-        llContinueScanTicketCode.setBackgroundColor(Color.parseColor("#4D92E0"))
         constraintLayout.background = AppHelper.getDashBackground(this)
     }
 
     override fun bindIntent() {
         playMedia()
         llContinueScanTicketCode.safeClicks().subscribe {
-            RxBus.post(ScanTicketCodeEvent())
             finish()
+            RxBus.post(ScanTicketCodeEvent())
         }
     }
 

@@ -23,8 +23,8 @@ class SunmiScannerHelper(private val context: Context, private var listener: Sca
     private val receiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             // 只有当前活动响应扫红外扫码结果
-            val top = ActivityUtils.getTopActivity()
-            if (top != this@SunmiScannerHelper.context) return
+//            val top = ActivityUtils.getTopActivity()
+//            if (top != this@SunmiScannerHelper.context) return
             val result = intent.getStringExtra("data")
             if (result != null) listener.onScanResult(result.replace("]ZP01", ""))
         }

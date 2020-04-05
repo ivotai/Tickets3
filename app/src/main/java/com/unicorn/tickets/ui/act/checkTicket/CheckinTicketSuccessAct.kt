@@ -56,8 +56,8 @@ class CheckinTicketSuccessAct : BaseAct() {
     override fun bindIntent() {
         playMedia()
         llContinueScanTicketCode.safeClicks().subscribe {
-            RxBus.post(ScanTicketCodeEvent())
             finish()
+            RxBus.post(ScanTicketCodeEvent())
         }
     }
 

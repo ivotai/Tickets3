@@ -1,6 +1,7 @@
 package com.unicorn.tickets.ui.act.checkTicket
 
 import android.content.Intent
+import com.blankj.utilcode.util.ActivityUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.unicorn.tickets.app.Key
 import com.unicorn.tickets.app.helper.DialogHelper
@@ -17,6 +18,8 @@ abstract class ScanTicketCodeAct : BaseAct() {
     override fun bindIntent() {
         sunmiScannerHelper = SunmiScannerHelper(this, object : SunmiScannerHelper.ScanListener {
             override fun onScanResult(result: String) {
+                val top = ActivityUtils.getTopActivity()
+                if (this@ScanTicketCodeAct != top) top.finish()
                 onTicketCodeGet(result)
             }
         })
@@ -72,7 +75,7 @@ abstract class ScanTicketCodeAct : BaseAct() {
                     } else {
                         val failReason = response.data.message
                         Intent(this, CheckinTicketFailedAct::class.java).apply {
-                            putExtra(Key.PayOrderResponse, failReason)
+                            putExtra(Key.Param, failReason)
                         }.let { startActivity(it) }
                     }
                 },
