@@ -13,6 +13,7 @@ import com.unicorn.tickets.data.model.CvTicketResponse
 import com.unicorn.tickets.data.model.ValidateTicketParam
 import com.unicorn.tickets.ui.act.main.SunmiScannerHelper
 import com.unicorn.tickets.ui.base.BaseAct
+import io.reactivex.exceptions.UndeliverableException
 import io.reactivex.rxkotlin.subscribeBy
 
 abstract class CvTicketAct : BaseAct() {
@@ -84,7 +85,7 @@ abstract class CvTicketAct : BaseAct() {
             .observeOnMain(this)
             .subscribeBy(
                 onSuccess = {
-//                    NetworkHelper.switchBaseUrl()
+                    //                    NetworkHelper.switchBaseUrl()
                     mask.dismiss()
                     if (it.success) validateTicketSuccess(it.data)
                     // 现在失败理由暂时放在 message 里
@@ -92,7 +93,7 @@ abstract class CvTicketAct : BaseAct() {
                     finishIfNeed()
                 },
                 onError = {
-//                    NetworkHelper.switchBaseUrl()
+                    //                    NetworkHelper.switchBaseUrl()
                     mask.dismiss()
                     ExceptionHelper.showPrompt(it)
                 }
@@ -126,7 +127,6 @@ abstract class CvTicketAct : BaseAct() {
             .observeOnMain(this)
             .subscribeBy(
                 onSuccess = {
-//                    NetworkHelper.switchBaseUrl()
                     mask.dismiss()
                     if (it.data.returnCode == "00") checkinTicketSuccess(it.data)
                     else checkinTicketFailed(it.data.message)
@@ -134,8 +134,8 @@ abstract class CvTicketAct : BaseAct() {
                     finishIfNeed()
                 },
                 onError = {
-//                    NetworkHelper.switchBaseUrl()
                     mask.dismiss()
+                    if (it is UndeliverableException) return@subscribeBy
                     ExceptionHelper.showPrompt(it)
                 }
             )

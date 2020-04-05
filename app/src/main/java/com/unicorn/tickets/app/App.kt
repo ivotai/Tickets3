@@ -7,6 +7,7 @@ import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.unicorn.tickets.app.helper.ExceptionHelper
 import io.reactivex.exceptions.OnErrorNotImplementedException
+import io.reactivex.exceptions.UndeliverableException
 import io.reactivex.plugins.RxJavaPlugins
 
 class App : MultiDexApplication() {
@@ -21,6 +22,9 @@ class App : MultiDexApplication() {
 
     private fun init() {
         RxJavaPlugins.setErrorHandler { throwable ->
+            if (throwable is UndeliverableException || throwable.cause is UndeliverableException) {
+                return@setErrorHandler
+            }
             when (throwable) {
                 is OnErrorNotImplementedException -> throwable.cause?.let {
                     ExceptionHelper.showPrompt(
