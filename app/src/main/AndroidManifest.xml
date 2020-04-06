@@ -42,6 +42,10 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.act.car.CarOrderAct"/>
 
+        <meta-data
+            android:name="BaiduMobAd_EXCEPTION_LOG"
+            android:value="true" />
+
     </application>
 
 </manifest>
