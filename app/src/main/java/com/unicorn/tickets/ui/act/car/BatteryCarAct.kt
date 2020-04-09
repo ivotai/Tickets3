@@ -11,6 +11,7 @@ import com.unicorn.tickets.app.Global
 import com.unicorn.tickets.app.safeClicks
 import com.unicorn.tickets.app.startAct
 import com.unicorn.tickets.ui.act.checkTicket.CvTicketAct
+import com.unicorn.tickets.ui.base.BaseAct
 import kotlinx.android.synthetic.main.act_battery_car.*
 import kotlinx.android.synthetic.main.act_cv_menu.ivSignOut
 import kotlinx.android.synthetic.main.act_cv_menu.titleBar
@@ -21,9 +22,7 @@ import kotlinx.android.synthetic.main.act_cv_menu.tvUsername
 import kotlinx.android.synthetic.main.act_cv_menu.tvVersionName
 import org.joda.time.DateTime
 
-class BatteryCarAct : CvTicketAct() {
-
-    override val shouldFinish = false
+class BatteryCarAct : BaseAct() {
 
     override val layoutId = R.layout.act_battery_car
 
