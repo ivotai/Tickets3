@@ -23,13 +23,13 @@ object NetworkHelper {
             .let { chain.proceed(it) }
     }
 
-    private var checkin = false
-
-//    fun switchBaseUrl() {
-//        RetrofitUrlManager.getInstance()
-//            .setGlobalDomain(if (checkin) Configs.baseUrl else Configs.checkinBaseUrl)
-//        checkin = !checkin
-//    }
+    fun closeConnection(chain: Interceptor.Chain): Response {
+        return chain.request().newBuilder()
+            .removeHeader("Connection")
+            .addHeader("Connection", "close")
+            .build()
+            .let { chain.proceed(it) }
+    }
 
     private val api by lazy { ComponentHolder.appComponent.api() }
 

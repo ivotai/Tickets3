@@ -27,6 +27,7 @@ class NetworkModule {
         val builder = OkHttpClient.Builder()
             .readTimeout(30, TimeUnit.SECONDS)
             .retryOnConnectionFailure(false)
+            .addInterceptor { NetworkHelper.closeConnection(it) }
             .addInterceptor { chain ->
                 if ("login" in chain.request().url.encodedPathSegments)
                     chain.proceed(chain.request())
@@ -65,6 +66,7 @@ class NetworkModule {
         val builder = OkHttpClient.Builder()
             .readTimeout(30, TimeUnit.SECONDS)
             .retryOnConnectionFailure(false)
+            .addInterceptor { NetworkHelper.closeConnection(it) }
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })
