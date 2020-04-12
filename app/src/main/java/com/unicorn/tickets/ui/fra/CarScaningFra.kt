@@ -7,7 +7,6 @@ import com.unicorn.tickets.R
 import com.unicorn.tickets.app.RxBus
 import com.unicorn.tickets.app.helper.DialogHelper
 import com.unicorn.tickets.app.helper.ExceptionHelper
-import com.unicorn.tickets.app.helper.NetworkHelper
 import com.unicorn.tickets.app.observeOnMain
 import com.unicorn.tickets.app.safeClicks
 import com.unicorn.tickets.data.event.CurrentItem
@@ -22,10 +21,13 @@ import kotlinx.android.synthetic.main.fra_car_scaning.*
 
 class CarScaningFra : BaseFra() {
 
+    private var _req = ""
+
     override val layoutId = R.layout.fra_car_scaning
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         if (isVisibleToUser) {
+            _req = java.util.UUID.randomUUID().toString()
             val red400 = ContextCompat.getColor(context!!, com.unicorn.tickets.R.color.md_red_400)
             tvPrompt.text = SimplifySpanBuild("正在支付车票")
                 .append(SpecialTextUnit(" $quantity ", red400))
@@ -49,13 +51,16 @@ class CarScaningFra : BaseFra() {
 
     private fun pay(result: String) {
         val mask = DialogHelper.showMask(context!!)
-        api.payOrder(PayCarOrderParam(authCode = result, quantity = quantity))
+        api.payOrder(
+            _req = _req,
+            payCarOrderParam = PayCarOrderParam(authCode = result, quantity = quantity)
+        )
             .observeOnMain(this)
             .subscribeBy(
                 onSuccess = {
                     mask.dismiss()
                     if (it.failed) return@subscribeBy
-                    payCarOrderResponse =it.data
+                    payCarOrderResponse = it.data
                     RxBus.post(CurrentItem(2))
                 },
                 onError = {

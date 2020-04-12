@@ -5,7 +5,7 @@ buildscript {
     repositories {
         google()
         jcenter()
-        
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.1'
@@ -21,7 +21,9 @@ allprojects {
         google()
         jcenter()
         maven { url "https://jitpack.io" }
-        maven { url 'http://github.com/wada811/Android-Material-Design-Colors/raw/master/repository/' }
+        maven {
+            url 'http://github.com/wada811/Android-Material-Design-Colors/raw/master/repository/'
+        }
     }
 }
 

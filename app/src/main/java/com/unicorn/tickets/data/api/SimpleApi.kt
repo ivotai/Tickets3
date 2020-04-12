@@ -21,7 +21,10 @@ import java.util.*
 interface SimpleApi {
 
     @GET("login/account")
-    fun login(@Query("username") username: String, @Query("password") password: String): Single<LoginResponse>
+    fun login(
+        @Query("username") username: String,
+        @Query("password") password: String
+    ): Single<LoginResponse>
 
     @GET("login/silence")
     fun loginSilently(@Query("token") token: String = Global.token): Call<LoginResponse>
@@ -84,7 +87,10 @@ interface SimpleApi {
     fun checkVersion(): Single<CheckVersionResponse>
 
     @POST("api/v1/pda/batteryCar/order/pay")
-    fun payOrder(@Body payCarOrderParam: PayCarOrderParam): Single<BaseResponse<PayCarOrderResponse>>
+    fun payOrder(
+        @Query("_req") _req: String,
+        @Body payCarOrderParam: PayCarOrderParam
+    ): Single<BaseResponse<PayCarOrderResponse>>
 
     @GET("api/v1/pda/batteryCar/order/list")
     fun getOrderList(
@@ -92,15 +98,15 @@ interface SimpleApi {
         @Query("endDate") endDate: String = DateTime().toString("yyyy/MM/dd"),
         @Query("page") page: Int,
         @Query("pageSize") pageSize: Int = Configs.defaultPageSize,
-        @Query("conductorId") conductorId:Long = Global.loginResponse.user.id,
-        @Query("terminalEquipmentTag") terminalEquipmentTag:String = DeviceUtils.getAndroidID(),
+        @Query("conductorId") conductorId: Long = Global.loginResponse.user.id,
+        @Query("terminalEquipmentTag") terminalEquipmentTag: String = DeviceUtils.getAndroidID(),
         @Query("travelDate") travelDate: String
     ): Single<BaseResponse<PageResponse<CarOrder>>>
 
     @GET("api/v1/pda/batteryCar/order/stats")
     fun getCarOrderStats(
-        @Query("conductorId") conductorId:Long = Global.loginResponse.user.id,
-        @Query("terminalEquipmentTag") terminalEquipmentTag:String = DeviceUtils.getAndroidID(),
+        @Query("conductorId") conductorId: Long = Global.loginResponse.user.id,
+        @Query("terminalEquipmentTag") terminalEquipmentTag: String = DeviceUtils.getAndroidID(),
         @Query("travelDate") travelDate: String
     ): Single<BaseResponse<List<CarStat>>>
 

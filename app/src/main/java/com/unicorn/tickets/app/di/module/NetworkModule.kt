@@ -26,6 +26,7 @@ class NetworkModule {
     fun provideOkHttpClient(): OkHttpClient {
         val builder = OkHttpClient.Builder()
             .readTimeout(30, TimeUnit.SECONDS)
+            .retryOnConnectionFailure(false)
             .addInterceptor { chain ->
                 if ("login" in chain.request().url.encodedPathSegments)
                     chain.proceed(chain.request())
@@ -63,6 +64,7 @@ class NetworkModule {
     fun provideRetrofit2(): Retrofit {
         val builder = OkHttpClient.Builder()
             .readTimeout(30, TimeUnit.SECONDS)
+            .retryOnConnectionFailure(false)
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })
