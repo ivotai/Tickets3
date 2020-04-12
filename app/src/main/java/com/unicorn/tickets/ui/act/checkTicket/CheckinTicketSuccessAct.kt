@@ -37,7 +37,7 @@ class CheckinTicketSuccessAct : BaseAct() {
                 .append(SpecialTextUnit(" $peopleCount ", red400))
                 .append("人")
                 .build()
-            tvPrompt.text = "本日检票${checkinCount + 1}人"
+            tvPrompt.text = "本日检票${checkinCount + peopleCount}人"
             tvDate.text =
                 "有效日期：${DateTime(beginTravelDate).toString("yyyy-MM-dd")} 至 ${DateTime(endTravelDate).toString(
                     "yyyy-MM-dd"
