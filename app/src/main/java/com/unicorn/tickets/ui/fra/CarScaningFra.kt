@@ -12,10 +12,8 @@ import com.unicorn.tickets.app.observeOnMain
 import com.unicorn.tickets.app.safeClicks
 import com.unicorn.tickets.data.event.CurrentItem
 import com.unicorn.tickets.data.model.PayCarOrderParam
-import com.unicorn.tickets.data.model.ValidateTicketParam
 import com.unicorn.tickets.ui.act.car.CarTicketScanAct.Companion.payCarOrderResponse
 import com.unicorn.tickets.ui.act.car.CarTicketScanAct.Companion.quantity
-import com.unicorn.tickets.ui.act.checkTicket.CvTicketAct.Companion.cv
 import com.unicorn.tickets.ui.act.main.SunmiScannerHelper
 import com.unicorn.tickets.ui.base.BaseFra
 import io.reactivex.rxkotlin.subscribeBy

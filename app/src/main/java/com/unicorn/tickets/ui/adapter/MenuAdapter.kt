@@ -6,11 +6,9 @@ import com.unicorn.tickets.app.RxBus
 import com.unicorn.tickets.app.safeClicks
 import com.unicorn.tickets.app.startAct
 import com.unicorn.tickets.app.toast
-import com.unicorn.tickets.data.event.ScanTicketCodeEvent
 import com.unicorn.tickets.data.model.Menu
 import com.unicorn.tickets.data.model.Menu.*
 import com.unicorn.tickets.ui.act.buyTicket.BuyTicketAct
-import com.unicorn.tickets.ui.act.checkTicket.CvTicketAct
 import com.unicorn.tickets.ui.act.orderSearch.OrderSearchAct
 import com.unicorn.tickets.ui.act.stateStatistic.StateStatisticAct
 import com.unicorn.tickets.ui.act.team.TeamAct

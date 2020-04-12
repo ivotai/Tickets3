@@ -10,7 +10,6 @@ import com.unicorn.tickets.app.Configs
 import com.unicorn.tickets.app.Global
 import com.unicorn.tickets.app.safeClicks
 import com.unicorn.tickets.app.startAct
-import com.unicorn.tickets.ui.act.checkTicket.CvTicketAct
 import com.unicorn.tickets.ui.base.BaseAct
 import kotlinx.android.synthetic.main.act_battery_car.*
 import kotlinx.android.synthetic.main.act_cv_menu.ivSignOut
