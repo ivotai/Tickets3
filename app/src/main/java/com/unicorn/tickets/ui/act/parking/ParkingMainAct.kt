@@ -32,9 +32,9 @@ class ParkingMainAct : BaseAct() {
 //        llCarSearch.safeClicks().subscribe {
 //            startAct(CarOrderAct::class.java)
 //        }
-//        llScan.safeClicks().subscribe {
-//            startAct(CarTicketScanAct::class.java)
-//        }
+        llScan.safeClicks().subscribe {
+            startAct(ParkingScanAct::class.java)
+        }
     }
 
     override val layoutId = R.layout.act_parking_main

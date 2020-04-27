@@ -35,12 +35,17 @@
         <activity android:name=".ui.act.team.TeamDetailAct" />
         <activity android:name=".ui.act.stateStatistic.StateStatisticAct" />
         <activity android:name=".ui.act.main.CheckinTicketAct" />
-        <activity android:name=".ui.act.car.BatteryCarAct"
+        <activity
+            android:name=".ui.act.car.BatteryCarAct"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.act.car.CarTicketScanAct"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.act.car.CarOrderAct" />
+        <activity android:name=".ui.act.parking.ParkingMainAct"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.act.car.CarTicketScanAct"
+        <activity android:name=".ui.act.parking.ParkingScanAct"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.act.car.CarOrderAct"/>
-        <activity android:name=".ui.act.parking.ParkingMainAct"/>
 
         <meta-data
             android:name="BaiduMobAd_EXCEPTION_LOG"

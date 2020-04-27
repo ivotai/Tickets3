@@ -117,7 +117,7 @@ interface SimpleApi {
     @POST("api/v1/pda/parking/order/pay")
     fun payParkingOrder(
         @Query("_req") _req: String,
-        @Body parkingOrderParam: PayParkingOrderParam
+        @Body payParkingOrderParam: PayParkingOrderParam
     ): Single<BaseResponse<PayParkingOrderResponse>>
 
     @GET("api/v1/pda/parking/order/list")
