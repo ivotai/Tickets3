@@ -40,6 +40,7 @@
         <activity android:name=".ui.act.car.CarTicketScanAct"
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.act.car.CarOrderAct"/>
+        <activity android:name=".ui.act.parking.ParkingMainAct"/>
 
         <meta-data
             android:name="BaiduMobAd_EXCEPTION_LOG"

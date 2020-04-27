@@ -11,6 +11,7 @@ import com.unicorn.tickets.app.startAct
 import com.unicorn.tickets.ui.act.car.BatteryCarAct
 import com.unicorn.tickets.ui.act.main.CheckinTicketAct
 import com.unicorn.tickets.ui.act.main.MenuAct
+import com.unicorn.tickets.ui.act.parking.ParkingMainAct
 import com.zhy.http.okhttp.OkHttpUtils
 import com.zhy.http.okhttp.callback.FileCallBack
 import io.reactivex.rxkotlin.subscribeBy
@@ -32,6 +33,8 @@ object UpdateHelper {
                             when (Global.loginResponse.user.roleTag) {
                                 "002" -> CheckinTicketAct::class.java
                                 "003" -> BatteryCarAct::class.java
+                                // todo modify 006 -> 004
+                                "006" -> ParkingMainAct::class.java
                                 else -> MenuAct::class.java
                             }
                         )
