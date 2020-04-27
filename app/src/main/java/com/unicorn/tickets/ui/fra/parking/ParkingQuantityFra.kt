@@ -11,10 +11,7 @@ import com.unicorn.tickets.app.RxBus
 import com.unicorn.tickets.app.safeClicks
 import com.unicorn.tickets.data.event.CurrentItem
 import com.unicorn.tickets.data.event.PaySuccessEvent
-import com.unicorn.tickets.data.model.CarQuantity
-import com.unicorn.tickets.data.model.ParkingQuantitiy
-import com.unicorn.tickets.ui.act.car.CarTicketScanAct
-import com.unicorn.tickets.ui.act.parking.ParkingScanAct
+import com.unicorn.tickets.data.model.ParkingQuantity
 import com.unicorn.tickets.ui.act.parking.ParkingScanAct.Companion.quantity
 import com.unicorn.tickets.ui.adapter.ParkingQuantityAdapter
 import com.unicorn.tickets.ui.base.BaseFra
@@ -31,7 +28,7 @@ class ParkingQuantityFra : BaseFra() {
             addItemDecoration(GridSpanDecoration2(ConvertUtils.dp2px(16f)))
         }
         parkingQuantityAdapter.setNewData(
-            (1..15).map { ParkingQuantitiy(it) }
+            (1..15).map { ParkingQuantity(it) }
         )
         val color = ContextCompat.getColor(context!!, R.color.md_grey_400)
         etQuantity.background = GradientDrawable().apply {
@@ -50,7 +47,7 @@ class ParkingQuantityFra : BaseFra() {
                 }
             }
             .subscribe {
-                RxBus.post(ParkingQuantitiy(isSelected = true, quantity = it))
+                RxBus.post(ParkingQuantity(isSelected = true, quantity = it))
             }
 
         rtvSubmitOrder.safeClicks().subscribe {
@@ -65,7 +62,7 @@ class ParkingQuantityFra : BaseFra() {
     private val parkingQuantityAdapter = ParkingQuantityAdapter()
 
     override fun registerEvent() {
-        RxBus.registerEvent(this, ParkingQuantitiy::class.java, Consumer {
+        RxBus.registerEvent(this, ParkingQuantity::class.java, Consumer {
             if (it.isSelected) {
                 tvDescription.text = "合计：${it.quantity * 10}"
                 quantity = it.quantity
@@ -76,8 +73,10 @@ class ParkingQuantityFra : BaseFra() {
             parkingQuantityAdapter.data.forEach { it.isSelected = false }
             parkingQuantityAdapter.notifyDataSetChanged()
             RxBus.post(CurrentItem(0))
+
+            parkingQuantityAdapter.defaultSelectOne()
         })
-        RxBus.post(ParkingQuantitiy(isSelected = true, quantity = 1))
+        parkingQuantityAdapter.defaultSelectOne()
     }
 
     override val layoutId = R.layout.fra_parking_quantity

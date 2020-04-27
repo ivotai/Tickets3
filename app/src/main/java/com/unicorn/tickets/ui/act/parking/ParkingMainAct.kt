@@ -17,7 +17,7 @@ import org.joda.time.DateTime
 class ParkingMainAct : BaseAct() {
 
     override fun initViews() {
-        titleBar.setTitle("扫码检票",false)
+        titleBar.setTitle("扫码停车",false)
         titleBar.findViewById<ConstraintLayout>(R.id.root)
             .setBackgroundColor(Color.parseColor("#F6B750"))
         tvVersionName.text = "程序版本：${AppUtils.getAppVersionName()}"

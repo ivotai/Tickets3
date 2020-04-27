@@ -7,14 +7,22 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.unicorn.tickets.R
 import com.unicorn.tickets.app.RxBus
 import com.unicorn.tickets.app.safeClicks
-import com.unicorn.tickets.data.model.CarQuantity
-import com.unicorn.tickets.data.model.ParkingQuantitiy
+import com.unicorn.tickets.data.model.ParkingQuantity
 import com.unicorn.tickets.ui.base.KVHolder
 import kotlinx.android.synthetic.main.item_parking_quantitiy.*
 
-class ParkingQuantityAdapter : BaseQuickAdapter<ParkingQuantitiy, KVHolder>(R.layout.item_car_quantitiy) {
+class ParkingQuantityAdapter :
+    BaseQuickAdapter<ParkingQuantity, KVHolder>(R.layout.item_car_quantitiy) {
 
-    override fun convert(helper: KVHolder, item: ParkingQuantitiy) {
+    fun defaultSelectOne() {
+        data.forEachIndexed { index, parkingQuantity ->
+            parkingQuantity.isSelected = index == 0
+        }
+        notifyDataSetChanged()
+        RxBus.post(data[0])
+    }
+
+    override fun convert(helper: KVHolder, item: ParkingQuantity) {
         helper.apply {
             rtvQuantity.text = item.quantity.toString()
             val color = ContextCompat.getColor(
