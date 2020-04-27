@@ -4,10 +4,7 @@ import com.blankj.utilcode.util.DeviceUtils
 import com.unicorn.tickets.app.Configs
 import com.unicorn.tickets.app.Global
 import com.unicorn.tickets.data.model.*
-import com.unicorn.tickets.data.model.base.BaseResponse
-import com.unicorn.tickets.data.model.base.GroupProduct
-import com.unicorn.tickets.data.model.base.PageResponse
-import com.unicorn.tickets.data.model.base.RefundTicketResponse
+import com.unicorn.tickets.data.model.base.*
 import io.reactivex.Observable
 import io.reactivex.Single
 import org.joda.time.DateTime
@@ -16,7 +13,6 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
-import java.util.*
 
 interface SimpleApi {
 
@@ -117,5 +113,32 @@ interface SimpleApi {
     fun getInventory(
         @Query("travelDate") beginDate: String = DateTime().toString("yyyy-MM-dd")
     ): Single<Int>
+
+    @POST("api/v1/pda/parking/order/pay")
+    fun payParkingOrder(
+        @Query("_req") _req: String,
+        @Body parkingOrderParam: PayParkingOrderParam
+    ): Single<BaseResponse<PayParkingOrderResponse>>
+
+    @GET("api/v1/pda/parking/order/list")
+    fun getParkingOrderList(
+        @Query("beginDate") beginDate: String = DateTime().toString("yyyy/MM/dd"),
+        @Query("endDate") endDate: String = DateTime().toString("yyyy/MM/dd"),
+        @Query("page") page: Int,
+        @Query("pageSize") pageSize: Int = Configs.defaultPageSize,
+        @Query("conductorId") conductorId: Long = Global.loginResponse.user.id,
+        @Query("terminalEquipmentTag") terminalEquipmentTag: String = DeviceUtils.getAndroidID(),
+        @Query("travelDate") travelDate: String
+    ): Single<BaseResponse<PageResponse<ParkingOrder>>>
+
+    @GET("api/v1/pda/parking/order/stats")
+    fun getParkingOrderStats(
+        @Query("conductorId") conductorId: Long = Global.loginResponse.user.id,
+        @Query("terminalEquipmentTag") terminalEquipmentTag: String = DeviceUtils.getAndroidID(),
+        @Query("travelDate") travelDate: String
+    ): Single<BaseResponse<List<ParkingOrderStat>>>
+
+    @POST("api/v1/pda/parking/order/refund")
+    fun refundParkingOrder(@Body refundParkingOrderParam: RefundParkingOrderParam): Single<BaseResponse<Any>>
 
 }
