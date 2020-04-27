@@ -29,9 +29,9 @@ class ParkingMainAct : BaseAct() {
     override fun bindIntent() {
         super.bindIntent()
         ivSignOut.clicks().mergeWith(tvSignOut.clicks()).subscribe { finish() }
-//        llCarSearch.safeClicks().subscribe {
-//            startAct(CarOrderAct::class.java)
-//        }
+        llCarSearch.safeClicks().subscribe {
+            startAct(ParkingOrderListAct::class.java)
+        }
         llScan.safeClicks().subscribe {
             startAct(ParkingScanAct::class.java)
         }
