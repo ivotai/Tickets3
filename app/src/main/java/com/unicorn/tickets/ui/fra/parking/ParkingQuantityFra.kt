@@ -23,12 +23,12 @@ class ParkingQuantityFra : BaseFra() {
 
     override fun initViews() {
         recyclerView.apply {
-            layoutManager = GridLayoutManager(context, 5)
+            layoutManager = GridLayoutManager(context, 2)
             adapter = parkingQuantityAdapter
             addItemDecoration(GridSpanDecoration2(ConvertUtils.dp2px(16f)))
         }
         parkingQuantityAdapter.setNewData(
-            (1..15).map { ParkingQuantity(it) }
+            (1..4).map { ParkingQuantity(it) }
         )
         val color = ContextCompat.getColor(context!!, R.color.md_grey_400)
         etQuantity.background = GradientDrawable().apply {

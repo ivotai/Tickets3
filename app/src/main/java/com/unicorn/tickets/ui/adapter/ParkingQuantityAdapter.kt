@@ -12,7 +12,7 @@ import com.unicorn.tickets.ui.base.KVHolder
 import kotlinx.android.synthetic.main.item_parking_quantitiy.*
 
 class ParkingQuantityAdapter :
-    BaseQuickAdapter<ParkingQuantity, KVHolder>(R.layout.item_car_quantitiy) {
+    BaseQuickAdapter<ParkingQuantity, KVHolder>(R.layout.item_parking_quantitiy) {
 
     fun defaultSelectOne() {
         data.forEachIndexed { index, parkingQuantity ->
