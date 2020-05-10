@@ -6,7 +6,7 @@ apply plugin: 'mtj-circle-plugin'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.1"
+    buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "com.unicorn.tickets"
         minSdkVersion 21
@@ -79,7 +79,7 @@ dependencies {
     implementation 'com.orhanobut:logger:2.2.0'
     implementation 'com.blankj:utilcodex:1.25.0'
     implementation 'joda-time:joda-time:2.10.3'
-    implementation 'com.wada811:android-material-design-colors:3.0.0'
+    implementation (name:'android-material-design-colors-3.0.0', ext:'aar')
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.47'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     kapt 'com.github.bumptech.glide:compiler:4.9.0'
