@@ -39,7 +39,7 @@ class CheckinTicketSuccessAct : BaseAct() {
                 isT -> {
                     Glide.with(this@CheckinTicketSuccessAct).load(photoUrl).into(ivSuccess)
                     tvTicketType.text = SimplifySpanBuild(productName)
-                        .append(SpecialTextUnit("($checkinQuantity/$userQuantity)", red400))
+                        .append(SpecialTextUnit("(${checkinQuantity + 1}/$useQuantity)", red400))
                         .build()
                     tvPrompt.text = "本日检票${checkinCount + peopleCount}人"
                 }
@@ -93,7 +93,8 @@ class CheckinTicketSuccessAct : BaseAct() {
 
     private fun playMedia() {
         val peopleCount = checkinTicketResponse.peopleCount
-        val fileName = if (peopleCount in 1..9) "suc_0$peopleCount.mp3" else "suc_01.mp3"
+        var fileName = if (peopleCount in 1..9) "suc_0$peopleCount.mp3" else "suc_01.mp3"
+        if (checkinTicketResponse.isG) fileName = "group.mp3"
         val assetFileDescriptor = assets.openFd(fileName)
         with(mediaPlayer) {
             reset()

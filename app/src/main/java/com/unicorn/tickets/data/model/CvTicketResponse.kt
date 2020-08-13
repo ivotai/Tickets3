@@ -22,7 +22,7 @@ data class CvTicketResponse(
     val studentCount: Int,
     var ticketCode: String,
     val checkinQuantity: Int,
-    val userQuantity: Int,
+    val useQuantity: Int,
     val photoUrl: String,
     val groupOrderInfo: GroupOrderInfo
 ) : Serializable {
