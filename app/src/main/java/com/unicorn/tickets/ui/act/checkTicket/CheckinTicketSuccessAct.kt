@@ -6,6 +6,7 @@ import cn.iwgang.simplifyspan.SimplifySpanBuild
 import cn.iwgang.simplifyspan.unit.SpecialTextUnit
 import com.blankj.utilcode.util.DeviceUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.bumptech.glide.Glide
 import com.github.florent37.rxsharedpreferences.RxSharedPreferences
 import com.unicorn.tickets.R
 import com.unicorn.tickets.app.Configs
@@ -33,20 +34,27 @@ class CheckinTicketSuccessAct : BaseAct() {
         val red400 = ContextCompat.getColor(this, R.color.md_red_400)
 
         with(checkinTicketResponse) {
-            tvTicketType.text = SimplifySpanBuild(productName)
-                .append(SpecialTextUnit(" $peopleCount ", red400))
-                .append("人")
-                .build()
-            tvPrompt.text = "本日检票${checkinCount + peopleCount}人"
+            if (isT){
+                Glide.with(this@CheckinTicketSuccessAct).load(photoUrl).into(ivSuccess)
+                tvTicketType.text = SimplifySpanBuild(productName)
+                    .append(SpecialTextUnit("($checkinQuantity/$userQuantity)", red400))
+                    .build()
+                tvPrompt.text = "本日检票${checkinCount + peopleCount}人"
+
+            }else{
+                tvTicketType.text = SimplifySpanBuild(productName)
+                    .append(SpecialTextUnit(" $peopleCount ", red400))
+                    .append("人")
+                    .build()
+                tvPrompt.text = "本日检票${checkinCount + peopleCount}人"
+            }
             tvDate.text =
                 "有效日期：${DateTime(beginTravelDate).toString("yyyy-MM-dd")} 至 ${DateTime(endTravelDate).toString(
                     "yyyy-MM-dd"
                 )}"
         }
 
-
         tvSourceTypeText.text = "购票渠道：${checkinTicketResponse.sourceTypeName}"
-
         tvTime.text = "检票时间：${DateTime().toString(Configs.displayDateFormat2)}"
         tvAndroidId.text = "检票设备：${DeviceUtils.getAndroidID()}"
         RxSharedPreferences.with(this).getString(Key.Username, "").subscribe {

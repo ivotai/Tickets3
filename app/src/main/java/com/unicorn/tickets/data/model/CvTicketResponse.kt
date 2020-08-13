@@ -20,7 +20,10 @@ data class CvTicketResponse(
     val sourceTypeName: String,
     val statusName: String,
     val studentCount: Int,
-    var ticketCode: String
+    var ticketCode: String,
+    val checkinQuantity: Int,
+    val userQuantity: Int,
+    val photoUrl: String
 ) : Serializable {
 
     val isT get() = ticketCode.startsWith("T")
