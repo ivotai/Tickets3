@@ -68,6 +68,7 @@ abstract class ScanTicketCodeAct : BaseAct() {
             .subscribeBy(
                 onSuccess = { response ->
                     mask.dismiss()
+                    response.data.ticketCode = ticketCode
                     val success = response.data.returnCode == "00"
                     if (success) {
                         Intent(this, CheckinTicketSuccessAct::class.java).apply {
