@@ -68,7 +68,7 @@ class CheckinTicketSuccessAct : BaseAct() {
                 )}"
         }
 
-        tvSourceTypeText.text = "购票渠道：${checkinTicketResponse.sourceTypeName}"
+        tvSourceTypeText.text = "购票渠道：${checkinTicketResponse.sourceTypeName ?: ""}"
         tvTime.text = "检票时间：${DateTime().toString(Configs.displayDateFormat2)}"
         tvAndroidId.text = "检票设备：${DeviceUtils.getAndroidID()}"
         RxSharedPreferences.with(this).getString(Key.Username, "").subscribe {

@@ -17,7 +17,7 @@ data class CvTicketResponse(
     val productName: String,
     val returnCode: String,
     val sourceType: Int,
-    val sourceTypeName: String,
+    val sourceTypeName: String?,
     val statusName: String,
     val studentCount: Int,
     var ticketCode: String,
