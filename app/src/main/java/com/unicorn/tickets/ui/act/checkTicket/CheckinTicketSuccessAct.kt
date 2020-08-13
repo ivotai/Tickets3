@@ -1,6 +1,7 @@
 package com.unicorn.tickets.ui.act.checkTicket
 
 import android.media.MediaPlayer
+import android.view.View
 import androidx.core.content.ContextCompat
 import cn.iwgang.simplifyspan.SimplifySpanBuild
 import cn.iwgang.simplifyspan.unit.SpecialTextUnit
@@ -34,19 +35,32 @@ class CheckinTicketSuccessAct : BaseAct() {
         val red400 = ContextCompat.getColor(this, R.color.md_red_400)
 
         with(checkinTicketResponse) {
-            if (isT){
-                Glide.with(this@CheckinTicketSuccessAct).load(photoUrl).into(ivSuccess)
-                tvTicketType.text = SimplifySpanBuild(productName)
-                    .append(SpecialTextUnit("($checkinQuantity/$userQuantity)", red400))
-                    .build()
-                tvPrompt.text = "本日检票${checkinCount + peopleCount}人"
-
-            }else{
-                tvTicketType.text = SimplifySpanBuild(productName)
-                    .append(SpecialTextUnit(" $peopleCount ", red400))
-                    .append("人")
-                    .build()
-                tvPrompt.text = "本日检票${checkinCount + peopleCount}人"
+            when {
+                isT -> {
+                    Glide.with(this@CheckinTicketSuccessAct).load(photoUrl).into(ivSuccess)
+                    tvTicketType.text = SimplifySpanBuild(productName)
+                        .append(SpecialTextUnit("($checkinQuantity/$userQuantity)", red400))
+                        .build()
+                    tvPrompt.text = "本日检票${checkinCount + peopleCount}人"
+                }
+                isG -> {
+                    tvTicketType.text = groupOrderInfo.groupName
+                    tvPrompt.text = "本日检票${groupOrderInfo.totalPeopleCount}人"
+                    tvGuideType.visibility = View.VISIBLE
+                    val guideTypeName = when (groupOrderInfo.guideType) {
+                        1 -> "标准线路"
+                        2 -> "专线"
+                        else -> "无"
+                    }
+                    tvGuideType.text = "是否导览：$guideTypeName"
+                }
+                else -> {
+                    tvTicketType.text = SimplifySpanBuild(productName)
+                        .append(SpecialTextUnit(" $peopleCount ", red400))
+                        .append("人")
+                        .build()
+                    tvPrompt.text = "本日检票${checkinCount + peopleCount}人"
+                }
             }
             tvDate.text =
                 "有效日期：${DateTime(beginTravelDate).toString("yyyy-MM-dd")} 至 ${DateTime(endTravelDate).toString(

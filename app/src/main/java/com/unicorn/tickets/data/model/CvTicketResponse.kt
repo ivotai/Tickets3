@@ -23,10 +23,13 @@ data class CvTicketResponse(
     var ticketCode: String,
     val checkinQuantity: Int,
     val userQuantity: Int,
-    val photoUrl: String
+    val photoUrl: String,
+    val groupOrderInfo: GroupOrderInfo
 ) : Serializable {
 
     val isT get() = ticketCode.startsWith("T")
+
+    val isG get() = ticketCode.startsWith("G")
 
 }
 
@@ -56,3 +59,22 @@ data class D(
     val statusName: String,
     val studentCount: Int
 )
+
+data class GroupOrderInfo(
+    val createTime: Any,
+    val detailList: List<Any>,
+    val groupName: String,
+    val guideAmount: Any,
+    val guideType: Any,
+    val leader: String,
+    val leaderMobile: String,
+    val memo: String,
+    val orderId: Long,
+    val payAmount: Any,
+    val status: Int,
+    val statusText: Any,
+    val ticketStatus: Int,
+    val totalAmount: Any,
+    val totalPeopleCount: Int,
+    val travelDate: Long
+) : Serializable
