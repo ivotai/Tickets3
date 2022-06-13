@@ -1,11 +1,9 @@
 package com.unicorn.tickets.app.di.module
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
-import com.unicorn.tickets.app.AppInfo
-import com.unicorn.tickets.app.Configs
-import com.unicorn.tickets.app.V1
-import com.unicorn.tickets.app.V2
+import com.unicorn.tickets.app.*
 import com.unicorn.tickets.app.helper.NetworkHelper
+import com.unicorn.tickets.data.event.Logout
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -36,15 +34,19 @@ class NetworkModule {
             }
             .addInterceptor { chain ->
                 val response = chain.proceed(chain.request())
-                if (response.code != 401) return@addInterceptor response
+                if (response.code != 401)
+                    return@addInterceptor response
                 // 401 表示 session 过期
-                NetworkHelper.proceedRequestWithNewSession(chain)
+
+                RxBus.post(Logout())
+                return@addInterceptor response
+//                NetworkHelper.proceedRequestWithNewSession(chain)
             }
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })
             .addNetworkInterceptor(StethoInterceptor())
-        return  builder.build()
+        return builder.build()
     }
 
     @Named(V1)
