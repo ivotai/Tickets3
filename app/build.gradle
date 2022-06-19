@@ -102,7 +102,7 @@ dependencies {
     implementation 'com.zhy:okhttputils:2.6.2'
     implementation 'com.shuhart.stepview:stepview:1.5.0'
     implementation 'com.chibatching.kotpref:kotpref:2.10.0'
-    implementation 'com.longer:verifycode:1.0.4'
+    implementation (name:'verifyedittext', ext:'aar')
     implementation 'com.github.RuffianZhong:RWidgetHelper:androidx.v0.0.10'
 }
 

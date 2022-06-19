@@ -19,7 +19,9 @@ interface SimpleApi {
     @GET("login/account")
     fun login(
         @Query("username") username: String,
-        @Query("password") password: String
+        @Query("password") password: String,
+        @Query("captchaKey") captchaKey: String,
+        @Query("captchaCode") captchaCode: String
     ): Single<LoginResponse>
 
     @GET("login/silence")

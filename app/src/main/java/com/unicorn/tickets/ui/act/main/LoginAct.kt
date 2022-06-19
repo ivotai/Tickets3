@@ -6,10 +6,13 @@ import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.afollestad.materialdialogs.list.listItemsSingleChoice
 import com.blankj.utilcode.util.AppUtils
+import com.blankj.utilcode.util.ConvertUtils
 import com.blankj.utilcode.util.PhoneUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.bumptech.glide.Glide
 import com.github.florent37.rxsharedpreferences.RxSharedPreferences
+import com.longer.verifyedittext.IPhoneCode.OnVCodeInputListener
+import com.longer.verifyedittext.PhoneCode
 import com.unicorn.tickets.R
 import com.unicorn.tickets.app.*
 import com.unicorn.tickets.app.helper.DialogHelper
@@ -19,6 +22,7 @@ import com.unicorn.tickets.ui.base.BaseAct
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.act_login.*
 import java.util.*
+
 
 class LoginAct : BaseAct() {
 
@@ -87,15 +91,28 @@ class LoginAct : BaseAct() {
     private fun showCaptchaDialog() {
         val dialog = MaterialDialog(this).show {
             customView(R.layout.dialog_captcha)
+            cornerRadius(ConvertUtils.dp2px(10f).toFloat())
         }
         val customView = dialog.getCustomView()
         val ivCaptcha = customView.findViewById<ImageView>(R.id.ivCaptcha)
         captchaKey = UUID.randomUUID().toString()
         val url = "${Configs.baseUrl}public/captcha?captchaKey=$captchaKey"
         Glide.with(this).load(url).into(ivCaptcha)
+
+        val phoneCode = customView.findViewById<PhoneCode>(R.id.phoneCode)
+        phoneCode.setOnVCodeCompleteListener(object : OnVCodeInputListener {
+            override fun vCodeComplete(captchaCode: String) {
+                dialog.dismiss()
+                loginReal(captchaCode = captchaCode)
+            }
+
+            override fun vCodeIncomplete(captchaCode: String) {
+
+            }
+        })
     }
 
-    private fun loginReal() {
+    private fun loginReal(captchaCode: String) {
         fun saveUserInfo() {
             RxSharedPreferences.with(this).apply {
                 putString(Key.Username, etUsername.trimText()).subscribe { }
@@ -105,14 +122,19 @@ class LoginAct : BaseAct() {
         }
 
         val mask = DialogHelper.showMask(this)
-        api.login(etUsername.trimText(), etPassword.trimText())
+        api.login(
+            username = etUsername.trimText(),
+            password = etPassword.trimText(),
+            captchaKey = captchaKey,
+            captchaCode = captchaCode
+        )
             .observeOnMain(this)
             .subscribeBy(
                 onSuccess = {
                     mask.dismiss()
 
                     // 90天修改一次密码（快过期时，提示用户修改）
-                    if (it.success) ToastUtils.showLong(it.tips)
+                    if (it.tips != null) ToastUtils.showLong(it.tips)
 
                     if (it.failed) return@subscribeBy
                     Global.loginResponse = it
