@@ -8,12 +8,12 @@ data class LoginResponse(
     val session: String,
     val success: Boolean,
     val user: User,
-    val message: String
+    val message: String?
 ) {
     val failed: Boolean
         get() {
             val failed = !success
-            if (failed) ToastUtils.showShort(message)
+            if (failed && message != null) ToastUtils.showShort(message)
             return failed
         }
 }

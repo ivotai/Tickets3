@@ -52,7 +52,7 @@ class LoginAct : BaseAct() {
         }
     }
 
-    private fun checkDevice(){
+    private fun checkDevice() {
         api.checkDevice(serialNumber = PhoneUtils.getSerial())
             .observeOnMain(this)
             .subscribeBy(
@@ -75,10 +75,10 @@ class LoginAct : BaseAct() {
             ToastUtils.showShort("密码不能为空")
             return
         }
-        showCaptchaDialog()
+        loginReal()
     }
 
-    private fun showCaptchaDialog(){
+    private fun showCaptchaDialog() {
         MaterialDialog(this).show {
             customView(R.layout.dialog_captcha)
         }
@@ -99,7 +99,11 @@ class LoginAct : BaseAct() {
             .subscribeBy(
                 onSuccess = {
                     mask.dismiss()
-                    if (it.failed) return@subscribeBy
+
+                    // 特殊处理无论是否登录成功都提示 message
+                    if (it.message != null) ToastUtils.showLong(it.message)
+
+                    if (!it.success) return@subscribeBy
                     Global.loginResponse = it
                     saveUserInfo()
                     UpdateHelper.checkVersion(this)
