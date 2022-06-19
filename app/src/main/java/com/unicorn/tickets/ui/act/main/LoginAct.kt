@@ -3,6 +3,7 @@ package com.unicorn.tickets.ui.act.main
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.list.listItemsSingleChoice
 import com.blankj.utilcode.util.AppUtils
+import com.blankj.utilcode.util.PhoneUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.github.florent37.rxsharedpreferences.RxSharedPreferences
 import com.unicorn.tickets.app.*
@@ -33,7 +34,7 @@ class LoginAct : BaseAct() {
     }
 
     override fun bindIntent() {
-        rtvLogin.safeClicks().subscribe { loginX() }
+        rtvLogin.safeClicks().subscribe { checkDevice() }
 
         tvChangeCheckBaseUrl.safeClicks().subscribe {
             val items = listOf(Configs.remoteCheckinBaseUrl, Configs.localCheckinBaseUrl)
@@ -49,6 +50,20 @@ class LoginAct : BaseAct() {
                 }
             }
         }
+    }
+
+    private fun checkDevice(){
+        api.checkDevice(serialNumber = PhoneUtils.getSerial())
+            .observeOnMain(this)
+            .subscribeBy(
+                onSuccess = {
+                    if (it.failed) return@subscribeBy
+                    loginX()
+                },
+                onError = {
+                    ExceptionHelper.showPrompt(it)
+                }
+            )
     }
 
     // login 的加强版

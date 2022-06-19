@@ -27,7 +27,7 @@ class NetworkModule {
             .retryOnConnectionFailure(false)
             .addInterceptor { NetworkHelper.closeConnection(it) }
             .addInterceptor { chain ->
-                if ("login" in chain.request().url.encodedPathSegments)
+                if ("login" in chain.request().url.encodedPathSegments || "checkDevice" in chain.request().url.encodedPathSegments)
                     chain.proceed(chain.request())
                 else
                     NetworkHelper.proceedRequestWithSession(chain)

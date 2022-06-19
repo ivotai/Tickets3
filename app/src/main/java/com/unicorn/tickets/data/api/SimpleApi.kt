@@ -141,4 +141,9 @@ interface SimpleApi {
     @POST("api/v1/pda/parking/order/refund")
     fun refundParkingOrder(@Body refundParkingOrderParam: RefundParkingOrderParam): Single<BaseResponse<Any>>
 
+
+    // 2022/6/19
+    @GET("public/checkDevice")
+    fun checkDevice(@Query("serialNumber") serialNumber: String): Single<BaseResponse<Any>>
+
 }
