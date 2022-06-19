@@ -1,11 +1,14 @@
 package com.unicorn.tickets.ui.act.main
 
+import android.widget.ImageView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
+import com.afollestad.materialdialogs.customview.getCustomView
 import com.afollestad.materialdialogs.list.listItemsSingleChoice
 import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.PhoneUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.bumptech.glide.Glide
 import com.github.florent37.rxsharedpreferences.RxSharedPreferences
 import com.unicorn.tickets.R
 import com.unicorn.tickets.app.*
@@ -15,6 +18,7 @@ import com.unicorn.tickets.app.helper.UpdateHelper
 import com.unicorn.tickets.ui.base.BaseAct
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.act_login.*
+import java.util.*
 
 class LoginAct : BaseAct() {
 
@@ -52,7 +56,7 @@ class LoginAct : BaseAct() {
         }
     }
 
-    private fun checkDevice(){
+    private fun checkDevice() {
         api.checkDevice(serialNumber = PhoneUtils.getSerial())
             .observeOnMain(this)
             .subscribeBy(
@@ -75,13 +79,20 @@ class LoginAct : BaseAct() {
             ToastUtils.showShort("密码不能为空")
             return
         }
-        loginReal()
+        showCaptchaDialog()
     }
 
-    private fun showCaptchaDialog(){
-        MaterialDialog(this).show {
+    private var captchaKey = ""
+
+    private fun showCaptchaDialog() {
+        val dialog = MaterialDialog(this).show {
             customView(R.layout.dialog_captcha)
         }
+        val customView = dialog.getCustomView()
+        val ivCaptcha = customView.findViewById<ImageView>(R.id.ivCaptcha)
+        captchaKey = UUID.randomUUID().toString()
+        val url = "${Configs.baseUrl}public/captcha?captchaKey=$captchaKey"
+        Glide.with(this).load(url).into(ivCaptcha)
     }
 
     private fun loginReal() {
