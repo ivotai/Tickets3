@@ -52,7 +52,7 @@ class LoginAct : BaseAct() {
         }
     }
 
-    private fun checkDevice() {
+    private fun checkDevice(){
         api.checkDevice(serialNumber = PhoneUtils.getSerial())
             .observeOnMain(this)
             .subscribeBy(
@@ -78,7 +78,7 @@ class LoginAct : BaseAct() {
         loginReal()
     }
 
-    private fun showCaptchaDialog() {
+    private fun showCaptchaDialog(){
         MaterialDialog(this).show {
             customView(R.layout.dialog_captcha)
         }
@@ -100,10 +100,10 @@ class LoginAct : BaseAct() {
                 onSuccess = {
                     mask.dismiss()
 
-                    // 特殊处理无论是否登录成功都提示 message
-                    if (it.message != null) ToastUtils.showLong(it.message)
+                    // 90天修改一次密码（快过期时，提示用户修改）
+                    if (it.success) ToastUtils.showLong(it.tips)
 
-                    if (!it.success) return@subscribeBy
+                    if (it.failed) return@subscribeBy
                     Global.loginResponse = it
                     saveUserInfo()
                     UpdateHelper.checkVersion(this)
