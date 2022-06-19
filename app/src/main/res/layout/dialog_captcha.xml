@@ -1,18 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-    <ImageView
+    <com.ruffian.library.widget.RImageView
         android:id="@+id/ivCaptcha"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="240px"
+        android:layout_height="120px"
+        android:scaleType="centerInside"
         android:layout_marginTop="16dp"
+        app:border_color="@color/md_grey_500"
+        app:border_width="1px"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.longer.verifyedittext.PhoneCode
+        android:id="@+id/phoneCode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        app:codeLength="5"
+        app:codeMargin="10dp"
+        app:codeStyle="1002"
+        app:codeTextColor="@color/colorPrimary"
+        app:codeTextSize="24sp"
+        app:focusContentColor="#fff"
+        app:focusStrokeColor="#eb6951"
+        app:isNumber="false"
+        app:isShowPwd="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivCaptcha"
+        app:normalContentColor="#fff"
+        app:normalStrokeColor="#eee"
+        app:strokeSize="5dp"
+        app:tvHeight="45dp"
+        app:tvWidth="45dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
