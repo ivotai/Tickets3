@@ -12,7 +12,10 @@ object Configs {
 
 //    const val checkinBaseUrl = "http://117.131.92.118:9015"
 
+    // 正式
      const val baseUrl = "https://ts.csnbgsh.com/"
+//   测试
+//    const val baseUrl = "http://cs.lefz.kjgk.xyz/"
 
 //    const val baseUrl = "https://tstest.csnbgsh.com/"
 
