@@ -11,6 +11,7 @@ import com.blankj.utilcode.util.PhoneUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.bumptech.glide.Glide
 import com.github.florent37.rxsharedpreferences.RxSharedPreferences
+import com.jakewharton.rxbinding3.view.clicks
 import com.longer.verifyedittext.IPhoneCode.OnVCodeInputListener
 import com.longer.verifyedittext.PhoneCode
 import com.unicorn.tickets.R
@@ -65,7 +66,7 @@ class LoginAct : BaseAct() {
             .observeOnMain(this)
             .subscribeBy(
                 onSuccess = {
-//                    if (it.failed) return@subscribeBy
+                    if (it.failed) return@subscribeBy
                     login()
                 },
                 onError = {
@@ -110,6 +111,12 @@ class LoginAct : BaseAct() {
 
             }
         })
+
+        ivCaptcha.clicks().subscribe {
+            captchaKey = UUID.randomUUID().toString()
+            val tempUrl = "${Configs.baseUrl}public/captcha?captchaKey=$captchaKey"
+            Glide.with(this).load(tempUrl).into(ivCaptcha)
+        }
     }
 
     private fun loginReal(captchaCode: String) {
