@@ -1,10 +1,11 @@
 package com.unicorn.tickets.app.di.module
 
-import com.blankj.utilcode.util.ToastUtils
+import com.blankj.utilcode.util.ActivityUtils
+import com.blankj.utilcode.util.ProcessUtils
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.unicorn.tickets.app.*
 import com.unicorn.tickets.app.helper.NetworkHelper
-import com.unicorn.tickets.data.event.Logout
+import com.unicorn.tickets.ui.act.main.LoginAct
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -40,7 +41,8 @@ class NetworkModule {
                     override fun intercept(chain: Interceptor.Chain): Response {
                         val response = chain.proceed(chain.request())
                         if (response.code == 401) {
-                            RxBus.post(Logout())
+                            ActivityUtils.finishAllActivities()
+                            ActivityUtils.startActivity(LoginAct::class.java)
                         }
                         return  response
                             // 1. 出现 401
