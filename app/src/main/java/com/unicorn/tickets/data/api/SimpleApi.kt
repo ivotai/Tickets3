@@ -16,7 +16,7 @@ import retrofit2.http.Query
 
 interface SimpleApi {
 
-    @GET("login/account")
+    @POST("login/account")
     fun login(
         @Query("username") username: String,
         @Query("password") password: String,
