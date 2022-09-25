@@ -9,19 +9,17 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import org.joda.time.DateTime
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface SimpleApi {
 
+    @FormUrlEncoded
     @POST("login/account")
     fun login(
-        @Query("username") username: String,
-        @Query("password") password: String,
-        @Query("captchaKey") captchaKey: String,
-        @Query("captchaCode") captchaCode: String
+        @Field("username") username: String,
+        @Field("password") password: String,
+        @Field("captchaKey") captchaKey: String,
+        @Field("captchaCode") captchaCode: String
     ): Single<LoginResponse>
 
     @GET("login/silence")
