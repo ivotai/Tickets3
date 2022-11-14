@@ -12,6 +12,8 @@ object Global {
 
     lateinit var groupApply: GroupApply
 
-     var inventory = 0
+    var inventory = 0
+
+    val roleTag: String get() = loginResponse.user.roleTag
 
 }

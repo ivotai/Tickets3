@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'mtj-circle-plugin'
 
 android {
     compileSdkVersion 29
@@ -40,15 +39,6 @@ android {
         // but continue the build even when errors are found:
         abortOnError false
     }
-}
-
-MtjCirclePluginConfig {
-    // 设置appkey，必须设置，否则插件使用无效
-    appkey = '490b0b7c2f'
-    // 设置debug 开关，默认关闭，如果需要查看日志则打开开关（true），建议正式版关闭以避免影响性能
-    debug = true
-    // 默认启动此插件，如果开发者不需要可以禁用（false）
-    enabled = true
 }
 
 dependencies {

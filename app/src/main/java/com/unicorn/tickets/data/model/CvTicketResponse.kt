@@ -34,10 +34,7 @@ data class CvTicketResponse(
 }
 
 data class CheckinLog(
-    val checker: String,
-    val checkin_time: Long,
-    val checkin_type: Int,
-    val gate_tag: String
+    val checker: String, val checkin_time: Long, val checkin_type: Int, val gate_tag: String
 ) : Serializable
 
 data class D(

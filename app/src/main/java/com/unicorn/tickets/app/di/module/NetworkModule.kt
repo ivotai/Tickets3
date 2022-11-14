@@ -105,4 +105,21 @@ class NetworkModule {
             .build()
     }
 
+    @Named(V3)
+    @Singleton
+    @Provides
+    fun provideRetrofit3(): Retrofit {
+        val builder = OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            })
+            .addNetworkInterceptor(StethoInterceptor())
+        return Retrofit.Builder()
+            .baseUrl(Configs.boatBaseUrl)
+            .client(builder.build())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
 }

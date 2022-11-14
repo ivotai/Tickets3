@@ -3,7 +3,6 @@ package com.unicorn.tickets.ui.base
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.unicorn.tickets.app.di.ComponentHolder
-import io.reactivex.functions.Consumer
 
 abstract class BaseAct : AppCompatActivity(), UI {
 
@@ -32,5 +31,7 @@ abstract class BaseAct : AppCompatActivity(), UI {
     protected val api = ComponentHolder.appComponent.api()
 
     protected val checkApi = ComponentHolder.appComponent.checkApi()
+
+    protected val v3Api = ComponentHolder.appComponent.v3Api()
 
 }
