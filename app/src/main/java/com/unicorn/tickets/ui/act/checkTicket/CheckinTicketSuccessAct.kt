@@ -41,11 +41,11 @@ class CheckinTicketSuccessAct : BaseAct() {
                     tvTicketType.text = SimplifySpanBuild(productName)
                         .append(SpecialTextUnit("(${checkinQuantity + 1}/$useQuantity)", red400))
                         .build()
-                    tvPrompt.text = "本日检票${checkinCount + peopleCount}人"
+                    tvPrompt.text = "本日检票${checkinCount + peopleCount}人 $healthStatusText"
                 }
                 isG -> {
                     tvTicketType.text = groupOrderInfo.groupName
-                    tvPrompt.text = "本日检票${groupOrderInfo.totalPeopleCount}人"
+                    tvPrompt.text = "本日检票${groupOrderInfo.totalPeopleCount}人 $healthStatusText"
                     tvGuideType.visibility = View.VISIBLE
                     val guideTypeName = when (groupOrderInfo.guideType) {
                         1 -> "标准线路"
@@ -59,7 +59,7 @@ class CheckinTicketSuccessAct : BaseAct() {
                         .append(SpecialTextUnit(" $peopleCount ", red400))
                         .append("人")
                         .build()
-                    tvPrompt.text = "本日检票${checkinCount + peopleCount}人"
+                    tvPrompt.text = "本日检票${checkinCount + peopleCount}人 $healthStatusText"
                 }
             }
             tvDate.text =

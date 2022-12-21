@@ -24,8 +24,18 @@ data class CvTicketResponse(
     val checkinQuantity: Int,
     val useQuantity: Int,
     val photoUrl: String,
-    val groupOrderInfo: GroupOrderInfo
+    val groupOrderInfo: GroupOrderInfo,
+    val healthStatus: String?
 ) : Serializable {
+
+    val healthStatusText: String
+        get() = when (healthStatus) {
+            null -> ""
+            "00" -> "绿码"
+            "01" -> "黄码"
+            "10" -> "红码"
+            else -> ""
+        }
 
     val isT get() = ticketCode.startsWith("T")
 

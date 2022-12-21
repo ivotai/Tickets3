@@ -8,7 +8,7 @@ object Configs {
 
     val defaultPaddingDp = ConvertUtils.dp2px(16f)
 
-//    const val baseUrl = "https://kjgk.natapp4.cc/ticket/"
+//    const val baseUrl = "http://ts.lefz.kjgk.xyz/ticket/"
 
 //    const val checkinBaseUrl = "http://117.131.92.118:9015"
 
@@ -17,7 +17,6 @@ object Configs {
 
     const val boatBaseUrl = "https://cstest.naturewharf.com/"
 
-
 //   测试
 //    const val baseUrl = "http://cs.lefz.kjgk.xyz/"
 
@@ -25,6 +24,8 @@ object Configs {
 
 //    const val checkinBaseUrl = "http://192.168.239.103/"
 
+//    const val remoteCheckinBaseUrl = "http://tc.lefz.kjgk.xyz/checkin/"
+//
     const val remoteCheckinBaseUrl = "https://tc.csnbgsh.com:9016/"
 
     const val localCheckinBaseUrl = "http://192.168.239.101:8080/"

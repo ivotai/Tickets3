@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/13276/StudioProjects/Tickets3/app/src/main/res/layout/act_checkin_boat_ticket_success.xml" value="0.3" />
+        <entry key="..\:/Users/13276/StudioProjects/Tickets3/app/src/main/res/layout/act_checkin_ticket_failed.xml" value="0.3" />
+        <entry key="..\:/Users/13276/StudioProjects/Tickets3/app/src/main/res/layout/act_checkin_ticket_success.xml" value="0.3" />
         <entry key="..\:/Users/13276/StudioProjects/Tickets3/app/src/main/res/layout/dialog_captcha.xml" value="0.3" />
       </map>
     </option>
