@@ -10,12 +10,24 @@ import com.unicorn.tickets.app.helper.AppHelper
 import com.unicorn.tickets.data.event.ScanTicketCodeEvent
 import com.unicorn.tickets.ui.base.BaseAct
 import kotlinx.android.synthetic.main.act_checkin_ticket_failed.*
+import kotlinx.android.synthetic.main.act_checkin_ticket_failed.constraintLayout
+import kotlinx.android.synthetic.main.act_checkin_ticket_failed.llContinueScanTicketCode
+import kotlinx.android.synthetic.main.act_checkin_ticket_failed.titleBar
+import kotlinx.android.synthetic.main.act_checkin_ticket_failed.tvAndroidId
+import kotlinx.android.synthetic.main.act_checkin_ticket_failed.tvContinueScanTicketCode
+import kotlinx.android.synthetic.main.act_checkin_ticket_failed.tvPrompt
+import kotlinx.android.synthetic.main.act_checkin_ticket_failed.tvTime
+import kotlinx.android.synthetic.main.act_checkin_ticket_failed.tvUsername
+import kotlinx.android.synthetic.main.act_checkin_ticket_success.*
 import org.joda.time.DateTime
 
 class CheckinTicketFailedAct : BaseAct() {
 
     override fun initViews() {
-        titleBar.setTitle("检票失败")
+//        titleBar.setTitle("检票失败")
+        titleBar.setTitle(if (Global.roleTag == Place) "核销失败" else "检票失败")
+        tvContinueScanTicketCode.text = if (Global.roleTag == Place) "继续核销" else "继续检票"
+
         tvFailReason.text = failReason
         tvTime.text = "检票时间：${DateTime().toString(Configs.displayDateFormat2)}"
         tvAndroidId.text = "检票设备：${DeviceUtils.getAndroidID()}"

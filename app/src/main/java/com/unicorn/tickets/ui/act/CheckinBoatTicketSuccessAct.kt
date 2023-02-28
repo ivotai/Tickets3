@@ -9,7 +9,15 @@ import com.unicorn.tickets.app.*
 import com.unicorn.tickets.app.helper.AppHelper
 import com.unicorn.tickets.data.event.ScanTicketCodeEvent
 import com.unicorn.tickets.ui.base.BaseAct
+import kotlinx.android.synthetic.main.act_checkin_ticket_failed.*
 import kotlinx.android.synthetic.main.act_checkin_ticket_success.*
+import kotlinx.android.synthetic.main.act_checkin_ticket_success.constraintLayout
+import kotlinx.android.synthetic.main.act_checkin_ticket_success.llContinueScanTicketCode
+import kotlinx.android.synthetic.main.act_checkin_ticket_success.titleBar
+import kotlinx.android.synthetic.main.act_checkin_ticket_success.tvAndroidId
+import kotlinx.android.synthetic.main.act_checkin_ticket_success.tvContinueScanTicketCode
+import kotlinx.android.synthetic.main.act_checkin_ticket_success.tvTime
+import kotlinx.android.synthetic.main.act_checkin_ticket_success.tvUsername
 import org.joda.time.DateTime
 
 class CheckinBoatTicketSuccessAct : BaseAct() {
@@ -19,6 +27,7 @@ class CheckinBoatTicketSuccessAct : BaseAct() {
         if (Global.roleTag == Place) {
             titleBar.setTitle("核销成功")
         }
+        tvContinueScanTicketCode.text = if (Global.roleTag == Place) "继续核销" else "继续检票"
 
         tvTime.text = "检票时间：${DateTime().toString(Configs.displayDateFormat2)}"
         tvAndroidId.text = "检票设备：${DeviceUtils.getAndroidID()}"
