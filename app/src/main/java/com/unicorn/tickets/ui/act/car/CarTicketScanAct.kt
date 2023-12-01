@@ -14,6 +14,7 @@ class CarTicketScanAct : BaseAct() {
     companion object {
         var quantity = 0
         var payCarOrderResponse:PayCarOrderResponse? = null
+        var category = 1
     }
 
     override val layoutId = R.layout.act_car_ticket_scan

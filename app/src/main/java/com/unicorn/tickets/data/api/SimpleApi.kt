@@ -146,4 +146,8 @@ interface SimpleApi {
     @GET("public/checkDevice")
     fun checkDevice(@Query("serialNumber") serialNumber: String): Single<BaseResponse<Any>>
 
+    // 2023/9/4
+    @POST("api/v1/pda/specific/checkin")
+    fun specificCheckin(@Body specificCheckinParam: SpecificCheckinParam): Single<SpecificCheckinResponse>
+
 }

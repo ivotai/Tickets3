@@ -10,10 +10,10 @@ import retrofit2.http.Query
 
 interface V3Api {
 
-    @POST("test_appointment/admin/activity/billing")
+    @POST("appointment/admin/activity/billing")
     fun checkBoatTicketCode(@Query("code") code: String ): Single<BaseResponse<BoatTicketResponse>>
 
-    @PUT("test_appointment/admin/activity/write_off")
+    @PUT("appointment/admin/activity/write_off")
     fun checkPlaceTicketCode(@Query("code") code:String): Single<BaseResponse<String>>
 
 }

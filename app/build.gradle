@@ -93,7 +93,9 @@ dependencies {
     implementation 'com.shuhart.stepview:stepview:1.5.0'
     implementation 'com.chibatching.kotpref:kotpref:2.10.0'
     implementation (name:'verifyedittext', ext:'aar')
-    implementation 'com.github.RuffianZhong:RWidgetHelper:androidx.v0.0.10'
+    implementation 'com.github.RuffianZhong:RWidgetHelper:androidx.v0.0.14'
+
+    implementation "com.sunmi:SunmiEID-SDK:1.3.14"
 }
 
 androidExtensions {

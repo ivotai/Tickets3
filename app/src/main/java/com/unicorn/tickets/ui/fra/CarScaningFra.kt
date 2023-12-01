@@ -11,6 +11,7 @@ import com.unicorn.tickets.app.observeOnMain
 import com.unicorn.tickets.app.safeClicks
 import com.unicorn.tickets.data.event.CurrentItem
 import com.unicorn.tickets.data.model.PayCarOrderParam
+import com.unicorn.tickets.ui.act.car.CarTicketScanAct.Companion.category
 import com.unicorn.tickets.ui.act.car.CarTicketScanAct.Companion.payCarOrderResponse
 import com.unicorn.tickets.ui.act.car.CarTicketScanAct.Companion.quantity
 import com.unicorn.tickets.ui.act.main.SunmiScannerHelper
@@ -29,10 +30,9 @@ class CarScaningFra : BaseFra() {
         if (isVisibleToUser) {
             _req = java.util.UUID.randomUUID().toString()
             val red400 = ContextCompat.getColor(context!!, com.unicorn.tickets.R.color.md_red_400)
-            tvPrompt.text = SimplifySpanBuild("正在支付车票")
-                .append(SpecialTextUnit(" $quantity ", red400))
-                .append("张")
-                .build()
+            tvPrompt.text =
+                SimplifySpanBuild("正在支付车票").append(SpecialTextUnit(" $quantity ", red400))
+                    .append("张").build()
             sunmiScannerHelper.scan()
         }
     }
@@ -51,23 +51,20 @@ class CarScaningFra : BaseFra() {
 
     private fun pay(result: String) {
         val mask = DialogHelper.showMask(context!!)
+        val param = PayCarOrderParam(authCode = result, quantity = quantity, category = category)
         api.payOrder(
-            _req = _req,
-            payCarOrderParam = PayCarOrderParam(authCode = result, quantity = quantity)
-        )
-            .observeOnMain(this)
-            .subscribeBy(
-                onSuccess = {
-                    mask.dismiss()
-                    if (it.failed) return@subscribeBy
-                    payCarOrderResponse = it.data
-                    RxBus.post(CurrentItem(2))
-                },
-                onError = {
-                    mask.dismiss()
-                    ExceptionHelper.showPrompt(it)
-                }
-            )
+            _req = _req, payCarOrderParam = param
+        ).observeOnMain(this).subscribeBy(onSuccess = {
+                mask.dismiss()
+                if (it.failed) return@subscribeBy
+                payCarOrderResponse = it.data
+                RxBus.post(CurrentItem(2))
+            }, onError = {
+                mask.dismiss()
+                ExceptionHelper.showPrompt(it)
+
+                // 储存超时数据 todo
+            })
     }
 
     private lateinit var sunmiScannerHelper: SunmiScannerHelper

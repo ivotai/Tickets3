@@ -32,6 +32,10 @@ class CheckinTicketAct : ScanTicketCodeAct() {
         if (Global.roleTag == Place) {
             tvScanTicketCode.text = "景点预约核检"
         }
+
+        btnCheckIdCard.safeClicks().subscribe {
+            startCheckCard()
+        }
     }
 
     override fun registerEvent() {

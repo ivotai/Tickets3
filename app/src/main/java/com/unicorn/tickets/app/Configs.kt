@@ -15,7 +15,7 @@ object Configs {
     // 正式
     const val baseUrl = "https://ts.csnbgsh.com/"
 
-    const val boatBaseUrl = "https://cstest.naturewharf.com/"
+    const val boatBaseUrl = "https://pjt.naturewharf.com/"
 
 //   测试
 //    const val baseUrl = "http://cs.lefz.kjgk.xyz/"
@@ -37,5 +37,9 @@ object Configs {
     const val displayDateFormat2 = "yyyy-MM-dd HH:mm:ss"
 
     const val displayDateFormat3 = "yyyy/MM/dd"
+
+    const val appId = "63641144e7da423386616fcc47449dd0"
+
+    const val appKey = "307cc524577d4d0b93e4732e7fc5dfca"
 
 }

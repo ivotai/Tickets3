@@ -17,6 +17,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <CheckBox
+        android:id="@+id/cbCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="20元随便乘"
+        app:layout_constraintBottom_toBottomOf="@+id/tvPrompt"
+        app:layout_constraintStart_toEndOf="@+id/tvPrompt"
+        app:layout_constraintTop_toTopOf="@+id/tvPrompt" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

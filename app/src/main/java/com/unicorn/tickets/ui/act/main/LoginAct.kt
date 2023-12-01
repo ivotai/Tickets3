@@ -11,18 +11,35 @@ import com.blankj.utilcode.util.PhoneUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.bumptech.glide.Glide
 import com.github.florent37.rxsharedpreferences.RxSharedPreferences
+import com.google.gson.Gson
 import com.jakewharton.rxbinding3.view.clicks
 import com.longer.verifyedittext.IPhoneCode.OnVCodeInputListener
 import com.longer.verifyedittext.PhoneCode
+import com.sunmi.eidlibrary.EidConstants
+import com.sunmi.eidlibrary.EidSDK
+import com.sunmi.eidlibrary.bean.ResultInfo
 import com.unicorn.tickets.R
-import com.unicorn.tickets.app.*
+import com.unicorn.tickets.app.AppInfo
+import com.unicorn.tickets.app.Configs
+import com.unicorn.tickets.app.Global
+import com.unicorn.tickets.app.Key
 import com.unicorn.tickets.app.helper.DialogHelper
 import com.unicorn.tickets.app.helper.ExceptionHelper
 import com.unicorn.tickets.app.helper.UpdateHelper
+import com.unicorn.tickets.app.isEmpty
+import com.unicorn.tickets.app.observeOnMain
+import com.unicorn.tickets.app.safeClicks
+import com.unicorn.tickets.app.toast
+import com.unicorn.tickets.app.trimText
 import com.unicorn.tickets.ui.base.BaseAct
 import io.reactivex.rxkotlin.subscribeBy
-import kotlinx.android.synthetic.main.act_login.*
-import java.util.*
+import kotlinx.android.synthetic.main.act_login.cbKeepPwd
+import kotlinx.android.synthetic.main.act_login.etPassword
+import kotlinx.android.synthetic.main.act_login.etUsername
+import kotlinx.android.synthetic.main.act_login.rtvLogin
+import kotlinx.android.synthetic.main.act_login.tvChangeCheckBaseUrl
+import java.util.Locale
+import java.util.UUID
 
 
 class LoginAct : BaseAct() {
@@ -76,6 +93,9 @@ class LoginAct : BaseAct() {
     }
 
     private fun login() {
+//        s()
+//        return
+
         if (etUsername.isEmpty()) {
             ToastUtils.showShort("工号不能为空")
             return

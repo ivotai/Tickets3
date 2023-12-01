@@ -7,6 +7,7 @@ import cn.iwgang.simplifyspan.SimplifySpanBuild
 import cn.iwgang.simplifyspan.unit.SpecialTextUnit
 import com.blankj.utilcode.util.ConvertUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.jakewharton.rxbinding3.widget.checkedChanges
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.unicorn.tickets.R
 import com.unicorn.tickets.app.RxBus
@@ -62,6 +63,10 @@ class CarQuantityFra : BaseFra() {
                 return@subscribe
             }
             RxBus.post(CurrentItem(1))
+        }
+
+        cbCategory.checkedChanges().subscribe {
+            CarTicketScanAct.category = if (it) 2 else 1
         }
     }
 

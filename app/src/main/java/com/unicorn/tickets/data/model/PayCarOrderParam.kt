@@ -7,5 +7,6 @@ data class PayCarOrderParam(
     val authCode: String,
     val conductorId: Long = Global.loginResponse.user.id,
     val quantity: Int,
-    val terminalEquipmentTag: String = DeviceUtils.getAndroidID()
+    val terminalEquipmentTag: String = DeviceUtils.getAndroidID(),
+    val category: Int    // 1 按量计费 2 随便乘
 )

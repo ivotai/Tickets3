@@ -44,8 +44,8 @@ class CheckinTicketSuccessAct : BaseAct() {
                     tvPrompt.text = "本日检票${checkinCount + peopleCount}人 $healthStatusText"
                 }
                 isG -> {
-                    tvTicketType.text = groupOrderInfo.groupName
                     tvPrompt.text = "本日检票${groupOrderInfo.totalPeopleCount}人 $healthStatusText"
+                    tvTicketType.text = groupOrderInfo.groupName
                     tvGuideType.visibility = View.VISIBLE
                     val guideTypeName = when (groupOrderInfo.guideType) {
                         1 -> "标准线路"

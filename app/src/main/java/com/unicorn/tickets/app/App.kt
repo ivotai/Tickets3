@@ -1,19 +1,24 @@
 package com.unicorn.tickets.app
 
 import androidx.multidex.MultiDexApplication
+import com.blankj.utilcode.util.ToastUtils
 import com.chibatching.kotpref.Kotpref
 import com.facebook.stetho.Stetho
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
+import com.sunmi.eidlibrary.EidConstants
+import com.sunmi.eidlibrary.EidSDK
 import com.unicorn.tickets.app.helper.ExceptionHelper
 import io.reactivex.exceptions.OnErrorNotImplementedException
 import io.reactivex.exceptions.UndeliverableException
 import io.reactivex.plugins.RxJavaPlugins
 
+
 class App : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
+
         Logger.addLogAdapter(AndroidLogAdapter())
         Stetho.initializeWithDefaults(this)
         Kotpref.init(this)
